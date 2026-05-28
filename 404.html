@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Dhiphos — Page not found</title>
+  <meta name="description" content="The page you're looking for doesn't exist on dhiphos.com." />
+  <!-- Mobile browser chrome tint. Paired so Android Chrome / iOS Safari
+       URL bar matches the page background in either system theme. -->
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+  <meta name="robots" content="noindex,follow" />
+
+  <!-- 404 pages should not be indexed but should pass link equity
+       through any links they contain (back to home, etc.). The
+       `noindex,follow` combo is the standard recipe. -->
+
+  <link rel="canonical" href="https://dhiphos.com/404.html" />
+
+  <meta property="og:title" content="Dhiphos — Page not found" />
+  <meta property="og:description" content="The page you're looking for doesn't exist on dhiphos.com." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dhiphos.com/404.html" />
+  <meta property="og:site_name" content="Dhiphos" />
+  <meta name="twitter:card" content="summary" />
+
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo-light.svg" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo-light.svg" media="(prefers-color-scheme: light)" />
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo-dark.svg"  media="(prefers-color-scheme: dark)" />
+  <link rel="apple-touch-icon" href="assets/img/logo-light.svg" />
+
+  <!-- PWA-lite manifest. Lets mobile browsers serve a proper icon +
+       launch URL when a visitor pins the site to their home screen. -->
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+  <!-- Preload latin webfont subsets — see comment in index.html. -->
+  <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+
+  <link rel="stylesheet" href="assets/css/styles.css" />
+</head>
+<body id="top">
+
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="topnav" aria-label="Primary">
+    <a class="topnav-brand" href="index.html" aria-label="Dhiphos home">
+      <span class="topnav-logo-slot" aria-hidden="true">
+        <img class="topnav-logo topnav-logo-light"
+             src="assets/img/logo-light.svg"
+             alt="" width="33" height="33" />
+        <img class="topnav-logo topnav-logo-dark"
+             src="assets/img/logo-dark.svg"
+             alt="" width="24" height="24" />
+      </span>
+      <span class="topnav-wordmark">Dhiphos</span>
+    </a>
+    <nav class="topnav-nav" aria-label="Section navigation">
+      <a href="index.html#offerings">offerings</a>
+      <a href="index.html#services">services</a>
+      <a href="index.html#team">team</a>
+      <a href="index.html#contact">contact</a>
+    </nav>
+  </header>
+
+  <main class="wrap" id="main">
+
+    <section class="hero" aria-labelledby="hero-h1">
+      <p class="chip-rail-eyebrow">// 404</p>
+
+      <h1 id="hero-h1" class="tagline">
+        Page not found.
+      </h1>
+
+      <p class="lede">
+        The URL you typed or followed doesn't exist on dhiphos.com.
+        It may have been moved, renamed, or never existed in the first place.
+      </p>
+
+      <p class="hero-actions">
+        <a class="btn btn-primary" href="index.html">Back to home &rarr;</a>
+        <a class="btn-link" href="index.html#contact">Contact us &rarr;</a>
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="foot" role="contentinfo">
+    <div class="foot-wrap">
+      <p class="foot-row foot-contact">
+        <span class="caret" aria-hidden="true"></span>
+        <a href="mailto:info@dhiphos.com">info@dhiphos.com</a>
+        <span class="foot-sep" aria-hidden="true"></span>
+        <a class="social-link"
+           href="https://www.linkedin.com/company/dhiphos"
+           target="_blank" rel="noopener noreferrer"
+           aria-label="Dhiphos on LinkedIn">
+          <svg class="social-icon" viewBox="0 0 24 24"
+               width="18" height="18" aria-hidden="true" focusable="false">
+            <path fill="currentColor"
+                  d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.27 2.36 4.27 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+          </svg>
+          <span class="visually-hidden">LinkedIn</span>
+        </a>
+      </p>
+      <p class="foot-legal small muted">
+        &copy; <span id="year"></span> &middot; Dhiphos Private Limited &middot; Bengaluru, India
+        <span class="foot-sep" aria-hidden="true"></span>
+        <a href="privacy.html">Privacy</a>
+      </p>
+    </div>
+  </footer>
+
+  <script src="assets/js/script.js" defer></script>
+</body>
+</html>

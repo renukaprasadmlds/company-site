@@ -1,0 +1,18 @@
+{
+  "name": "Dhiphos",
+  "short_name": "Dhiphos",
+  "description": "Industrial software for modern manufacturing — MES/MOM, IIoT edge, digital twins, physical AI.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#1a1a1a",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "assets/img/logo-light.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
