@@ -200,7 +200,34 @@ git push origin main
 
 GitHub Pages picks up the change within ~30–60 seconds and re-publishes.
 A green "Active" indicator under repo Settings → Pages confirms the build
-status.
+status. Each deploy is also visible under the repo's **Actions** tab as a
+"pages build and deployment" run.
+
+### Repository access & control
+
+The repo is **public** (a GitHub Pages requirement on the free tier), but
+write access is restricted to a single owner. Public visibility only grants
+read / clone / fork rights — it does **not** let outsiders modify the
+hosted site.
+
+Policy in effect:
+
+- **Collaborators:** none. Settings → Collaborators is intentionally empty,
+  so only the repo owner can push to `main`.
+- **Pull requests from forks:** allowed to be opened (this can't be disabled
+  on a public repo), but they have no effect until the owner explicitly
+  reviews and merges them. Unmerged PRs never reach `main` and therefore
+  never reach the live site.
+- **Branch protection on `main`:** force-pushes blocked, branch deletion
+  blocked. Configured under Settings → Branches.
+- **Issues:** disabled under Settings → General → Features (we don't run
+  a public issue tracker).
+- **Account hardening:** the owner account has 2FA enabled; SSH keys and
+  personal access tokens are reviewed periodically.
+
+Net effect: the live `dhiphos.com` site only changes when the owner pushes
+to `main` (or merges a PR into `main`). Anyone else can read the source or
+fork it, but cannot influence what is served.
 
 ### DNS (Hostinger → GitHub Pages)
 
