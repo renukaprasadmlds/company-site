@@ -55,7 +55,7 @@ A standalone privacy notice that reuses the same `assets/css/styles.css`, palett
 - how to contact us for privacy questions.
 
 The hosting and email-provider third-party entries are filled in for our
-current setup (Zoho Sites + Zoho Mail). If either changes, edit the matching
+current setup (GitHub Pages + Zoho Mail). If either changes, edit the matching
 `<div class="entry">` in the **hosting &amp; third parties** section.
 
 The "Last updated" date is hardcoded near the top — update it whenever you revise the page.
@@ -172,18 +172,59 @@ Both fonts are licensed under the **SIL Open Font License (OFL) 1.1**, which per
 
 ## Deploying
 
-Plain static site — drop the folder onto:
+Plain static site — no build step. Publish directory: this folder.
 
-- **Zoho Sites** — current production target. Upload via the Zoho Sites admin console (the whole project folder is the publish directory).
-- **GitHub Pages** — push to a repo, enable Pages on `main`.
-- **Netlify** / **Vercel** / **Cloudflare Pages** — drag-and-drop the folder, or connect the repo.
-- **S3 + CloudFront**, **nginx**, etc.
+### Production: GitHub Pages on `dhiphos.com`
 
-No build command. Publish directory: this folder.
+The site is hosted on **GitHub Pages**, served from the `main` branch of
+[`renukaprasadmlds/dhiphos-site`](https://github.com/renukaprasadmlds/dhiphos-site)
+at the custom domain `dhiphos.com`.
 
-The `dhiphos.com` domain is registered through **Hostinger**; the DNS records
-point at the Zoho Sites host. The registrar is otherwise not in the request
-path for visitor traffic.
+Two repo-root files anchor the deployment:
+
+- `CNAME` — contains `dhiphos.com`. GitHub Pages reads this and configures
+  the custom-domain TLS certificate and the `dhiphos.com` ↔ `*.github.io`
+  routing automatically. **Do not delete or edit this file** unless you're
+  changing the production domain.
+- `.nojekyll` — an empty marker file. Disables the default Jekyll preprocessing
+  GitHub Pages would otherwise run. Our site is plain HTML/CSS/JS with no
+  Jekyll templating; `.nojekyll` keeps Pages from trying to interpret any
+  filename starting with `_` (none today, but a safety net for future
+  filenames like `_redirects`, `_headers`, etc.).
+
+To deploy, just push to `main`:
+
+```sh
+git push origin main
+```
+
+GitHub Pages picks up the change within ~30–60 seconds and re-publishes.
+A green "Active" indicator under repo Settings → Pages confirms the build
+status.
+
+### DNS (Hostinger → GitHub Pages)
+
+The `dhiphos.com` domain is registered through **Hostinger**. The
+DNS records point at GitHub Pages' four anycast IPs for the apex,
+plus a `CNAME` record on `www` for redirect support:
+
+```
+A     @         185.199.108.153
+A     @         185.199.109.153
+A     @         185.199.110.153
+A     @         185.199.111.153
+CNAME www       renukaprasadmlds.github.io.
+```
+
+After DNS propagates (typically 5 minutes to a few hours), GitHub Pages
+issues a Let's Encrypt SSL cert automatically. The "Enforce HTTPS"
+checkbox on Settings → Pages should then be enabled.
+
+### Alternative hosts (not currently used)
+
+Plain static — drop the folder onto **Netlify**, **Vercel**, **Cloudflare
+Pages**, **S3 + CloudFront**, **nginx**, **Zoho Sites**, etc. No build
+command. Publish directory: this folder.
 
 ## Credits
 
