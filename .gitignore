@@ -1,0 +1,21 @@
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# Build/temp artifacts (none expected — site is no-build)
+node_modules/
+dist/
+*.log
+
+# Local env / secrets (none expected; here as a safety net)
+.env
+.env.local
+*.pem
+
+# Generated/derived assets cache, if any tooling is added later
+.cache/
