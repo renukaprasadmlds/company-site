@@ -25,10 +25,9 @@ dhiphos-site/
     ├── js/
     │   └── script.js               # year stamp + signup form handler
     ├── fonts/
-    │   ├── space-grotesk-latin.woff2          # display font (variable, latin subset)
-    │   ├── space-grotesk-latin-ext.woff2      # display font (variable, latin-ext subset)
-    │   ├── jetbrains-mono-latin.woff2         # mono font (variable, latin subset)
-    │   └── jetbrains-mono-latin-ext.woff2     # mono font (variable, latin-ext subset)
+    │   ├── geist-sans.woff2                   # display + body (variable, full latin)
+    │   ├── geist-mono.woff2                   # identifiers — chips, eyebrows, entry titles (variable, full latin)
+    │   └── space-grotesk-latin.woff2          # brand wordmark only (variable, latin subset)
     └── img/
         ├── logo-light.svg          # light-theme logo (boxed graphic)
         ├── logo-dark.svg           # dark-theme logo (graphic only)
@@ -109,33 +108,35 @@ a small filled diamond drawn entirely in CSS — adjust its size via the
 
 ## Typography
 
-Two faces, both **self-hosted** from `assets/fonts/` as variable-font WOFF2
-files (one file per font per unicode subset):
+Three faces, all **self-hosted** from `assets/fonts/` as variable-font WOFF2:
 
-- **Space Grotesk** — display + body, including the brand wordmark. Variable axis: `wght 400–700`.
-- **JetBrains Mono** — used for entry titles so they read as identifiers/symbols. Variable axis: `wght 400–600`.
+- **Geist** — display + body. Frontier-tech neutral sans (Vercel, OFL). Variable weight `100–900`.
+- **Geist Mono** — identifiers (entry titles, chips, eyebrows, topnav links). Pairs natively with Geist. Variable weight `100–900`.
+- **Space Grotesk** — brand wordmark only. Used in exactly one place: `.topnav-wordmark` (rendered as `DHIPHOS`). Gives the brand name a distinct typographic signature. Variable weight `400–700`, latin subset.
 
-System-font fallbacks are defined for both. The `@font-face` declarations live
-at the top of `assets/css/styles.css` and reference `../fonts/*.woff2`; both
-`latin` and `latin-ext` subsets are shipped with `unicode-range` set so the
-browser only fetches the subset it needs.
+The `@font-face` declarations live at the top of `assets/css/styles.css`. The
+display + mono families ship as single full-Latin variable WOFF2 files; Space
+Grotesk is restricted to the latin `unicode-range` since the wordmark is
+ASCII-only. System-font fallbacks are defined via `--font-display`,
+`--font-mono`, and `--font-brand` CSS tokens.
 
-There are no third-party font CDN requests at runtime. Both fonts are licensed
-under the **SIL Open Font License (OFL) 1.1**.
+There are no third-party font CDN requests at runtime. All three fonts are
+licensed under the **SIL Open Font License (OFL) 1.1**.
 
 ## Brand naming
 
 The source-of-truth in markup, metadata, alt text, page titles, and prose is
-**`Dhiphos`** (mixed case). The all-caps rendering in the hero brand-row and
-the top-nav wordmark is purely typographic, handled by CSS:
+**`Dhiphos`** (mixed case). The all-caps rendering on the top-nav wordmark is
+purely typographic, handled by CSS:
 
 ```css
-.brand,
 .topnav-wordmark { text-transform: uppercase; }
 ```
 
 A single edit to `Dhiphos` in markup updates the whole site while the wordmark
-surfaces still display as `DHIPHOS`.
+surface still displays as `DHIPHOS`. The wordmark is also the only place
+**Space Grotesk** is used — the rest of the site is set in Geist (see
+[Typography](#typography)).
 
 ## Deploying
 

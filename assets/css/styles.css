@@ -1,17 +1,38 @@
 /* Dhiphos — minimalist, modern industrial styling.
    Palette: #333333 / #888888 / #ffffff / #B45309  (warm amber / forge)
-   Fonts:   Space Grotesk (display, body, brand wordmark)
-            JetBrains Mono (entry titles — read as identifiers/symbols)
-   Both fonts are self-hosted from `assets/fonts/` to keep the site
-   third-party-free at runtime (no requests to fonts.googleapis.com or
-   fonts.gstatic.com on page load). Variable-font WOFF2 builds — one
-   file per font per subset covers every weight we use. */
+   Fonts:   Geist          (display + body — neutral frontier-tech sans)
+            Geist Mono     (identifiers — entry titles, chips, eyebrows)
+            Space Grotesk  (brand wordmark only — `.topnav-wordmark`)
+   All fonts are self-hosted from `assets/fonts/` to keep the site
+   third-party-free at runtime. Geist + Geist Mono are shipped as
+   single full-Latin variable-font WOFF2 files (covering every weight
+   we use). Space Grotesk is kept latin-only and used in exactly one
+   place — the topnav wordmark — so the brand name has a typographic
+   signature distinct from the rest of the page. */
 
-/* ---------- @font-face ----------
-   Subsets and unicode-ranges are taken verbatim from Google Fonts'
-   css2 endpoint as of v22 (Space Grotesk) / v24 (JetBrains Mono).
-   `font-display: swap` mirrors the previous Google Fonts behaviour. */
+/* ---------- @font-face ---------- */
 
+@font-face {
+  font-family: 'Geist';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../fonts/geist-sans.woff2') format('woff2-variations'),
+       url('../fonts/geist-sans.woff2') format('woff2');
+}
+
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('../fonts/geist-mono.woff2') format('woff2-variations'),
+       url('../fonts/geist-mono.woff2') format('woff2');
+}
+
+/* Space Grotesk — brand wordmark only. Kept on the latin subset
+   (the wordmark "Dhiphos" is ASCII-only) and only requested when
+   the .topnav-wordmark element is on the page. */
 @font-face {
   font-family: 'Space Grotesk';
   font-style: normal;
@@ -19,31 +40,6 @@
   font-display: swap;
   src: url('../fonts/space-grotesk-latin.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'Space Grotesk';
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url('../fonts/space-grotesk-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400 600;
-  font-display: swap;
-  src: url('../fonts/jetbrains-mono-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: 'JetBrains Mono';
-  font-style: normal;
-  font-weight: 400 600;
-  font-display: swap;
-  src: url('../fonts/jetbrains-mono-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
 }
 
 :root {
@@ -57,12 +53,15 @@
   --rule:      #88888833;
   --selection: #B4530933;
 
-  --font-display: "Space Grotesk", ui-sans-serif, system-ui, -apple-system,
+  --font-display: "Geist", ui-sans-serif, system-ui, -apple-system,
                   BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
                   Arial, sans-serif;
-  --font-mono:    "JetBrains Mono", ui-monospace, SFMono-Regular, "SF Mono",
+  --font-mono:    "Geist Mono", ui-monospace, SFMono-Regular, "SF Mono",
                   Menlo, Consolas, "Liberation Mono", "DejaVu Sans Mono",
                   monospace;
+  --font-brand:   "Space Grotesk", ui-sans-serif, system-ui, -apple-system,
+                  BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+                  Arial, sans-serif;
 
   --measure: 64ch;
   --pad-x: clamp(1.25rem, 4vw, 2.25rem);
@@ -114,6 +113,10 @@ html {
 body {
   font-family: var(--font-display);
   font-size: 18px;
+  font-weight: 350;            /* Geist 400 reads heavier than other sans at 400;
+                                  350 leans on Geist's variable axis to land on
+                                  a body weight that reads as quiet as a typical
+                                  non-Geist regular. */
   line-height: 1.65;
   font-feature-settings: "ss01", "ss02";
   -webkit-font-smoothing: antialiased;
@@ -204,7 +207,7 @@ a:hover {
 .topnav-brand {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;                /* mark + wordmark lockup spacing */
+  gap: 0.6rem;                 /* mark + wordmark lockup spacing */
   text-decoration: none;
   color: var(--fg);
   margin-right: auto;          /* push everything else right */
@@ -254,10 +257,10 @@ a:hover {
    "DHIPHOS" purely typographically so the source-of-truth for the
    brand name stays consistent across markup and metadata. */
 .topnav-wordmark {
-  font-family: var(--font-display);
+  font-family: var(--font-brand);
   font-weight: 600;
   letter-spacing: 0.06em;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   color: var(--fg);
   text-transform: uppercase;
 }
@@ -312,66 +315,6 @@ a:hover {
   border-bottom: 1px solid var(--rule);
 }
 
-.brand-row {
-  display: flex;
-  align-items: center;
-  gap: 0.95rem;
-  margin: 0 0 1.4rem;
-}
-
-.logo {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 56px;
-  height: 56px;
-  flex: 0 0 auto;
-  color: var(--accent);
-  text-decoration: none;
-  border-radius: 10px;
-  transition: transform 150ms ease, color 150ms ease;
-}
-.logo:hover {
-  color: var(--accent);
-  transform: translateY(-1px);
-  text-decoration: none;
-}
-.logo svg,
-.logo-img {
-  display: block;
-  object-fit: contain;
-}
-
-/* Theme-aware logo swap. Light = boxed graphic; Dark = graphic only.
-   Dark variant is rendered at ~73% to compensate for the missing box. */
-.logo-light {
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-.logo-dark {
-  display: none;
-  width: 72.7%;
-  height: 72.7%;
-}
-@media (prefers-color-scheme: dark) {
-  .logo-light { display: none; }
-  .logo-dark  { display: block; }
-}
-
-/* Hero brand display — same trick as .topnav-wordmark: source text
-   is "Dhiphos", rendered visually as "DHIPHOS" via text-transform.
-   Slight positive tracking compensates for the all-caps glyph rhythm. */
-.brand {
-  font-family: var(--font-display);
-  font-size: clamp(2.4rem, 5.5vw, 3.25rem);
-  font-weight: 600;
-  letter-spacing: 0.005em;
-  margin: 0;
-  color: var(--fg);
-  text-transform: uppercase;
-}
-
 /* Hero copy fills the full column on every viewport — same horizontal
    footprint as the section headings, chip-rails, illustrations, and
    entry border-rules used elsewhere on the page. No artificial inner
@@ -379,9 +322,9 @@ a:hover {
    itself widens responsively (64ch → 72ch → 78ch) on bigger screens. */
 .tagline {
   font-family: var(--font-display);
-  font-size: clamp(1.45rem, 3vw, 1.85rem);
-  font-weight: 500;
-  line-height: 1.35;
+  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.3;
   letter-spacing: -0.01em;
   color: var(--fg);
   margin: 0 0 1.25rem;
@@ -406,7 +349,9 @@ a:hover {
 }
 
 /* Mono eyebrow above each chip rail — same family as .entry-title so
-   the rails read as part of the same typographic system. */
+   the rails read as part of the same typographic system. Rendered as
+   a quiet lowercase label, matching the lowercase-identifier register
+   used for H2s, entry titles, and most chips elsewhere on the page. */
 .chip-rail-eyebrow {
   font-family: var(--font-mono);
   font-size: 0.78rem;
@@ -429,6 +374,12 @@ a:hover {
   border-radius: 999px;
   padding: 0.2rem 0.6rem;
   white-space: nowrap;
+}
+/* Strengthen the chip border in dark mode — the global `--rule` token
+   is intentionally faint (#ffffff1f) for hairline section dividers,
+   but at chip scale it almost disappears against #1a1a1a. */
+@media (prefers-color-scheme: dark) {
+  .chip { border-color: #ffffff33; }
 }
 
 .hero-actions {
@@ -499,15 +450,47 @@ a:hover {
   color: var(--on-accent);
 }
 
+/* Trailing arrow on CTA buttons — slides right on hover/focus to
+   reinforce the "go" affordance. Keep zero motion when the user
+   has prefers-reduced-motion enabled. */
+.btn-arrow {
+  display: inline-block;
+  margin-left: 0.35em;
+  transition: transform 150ms ease;
+}
+.btn:hover .btn-arrow,
+.btn:focus-visible .btn-arrow,
+.btn:active .btn-arrow {
+  transform: translateX(3px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-arrow { transition: none; }
+  .btn:hover .btn-arrow,
+  .btn:focus-visible .btn-arrow,
+  .btn:active .btn-arrow { transform: none; }
+}
+
 /* ---------- Section blocks ---------- */
 
 .block { margin: clamp(2rem, 5vw, 3rem) 0; }
 
+/* Section-to-section separator. Hairline rule + extra air so each
+   block reads as a discrete unit on the page. Entry-level rules
+   (top/bottom of the .entry stack) handle sub-section separation. */
+.block + .block {
+  border-top: 1px solid var(--rule);
+  padding-top: clamp(2.5rem, 6vw, 4rem);
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+}
+
 .section {
   font-family: var(--font-display);
-  font-size: 1.15rem;
-  font-weight: 600;
+  font-size: 1.5rem;
+  font-weight: 500;          /* Geist 600 reads loud at H2 size; 500 keeps the
+                                heading calm while size (1.5rem) carries the
+                                hierarchy. */
   letter-spacing: 0.005em;
+  line-height: 1.25;
   margin: 0 0 1.25rem;
   color: var(--fg);
 }
@@ -537,6 +520,7 @@ a:hover {
 
 .entry p {
   font-family: var(--font-display);
+  font-weight: 350;
   margin: 0;
   color: var(--fg);
   max-width: 62ch;
@@ -581,10 +565,11 @@ a:hover {
 }
 .illus-img {
   display: block;
-  width: 100%;
-  max-width: 720px;            /* keep diagrams at their useful size on wide screens */
+  width: 100%;                 /* fill the prose column at every viewport so
+                                  illustrations grow along with `--measure` on
+                                  wider screens, instead of being capped. */
   height: auto;
-  margin: 0 auto;              /* center within the prose column when capped */
+  margin: 0;
   border-radius: 8px;
 }
 .illus-light { display: block; }
@@ -791,7 +776,7 @@ a:hover {
     padding-top: clamp(1.5rem, 2.5vw, 2.75rem);
     padding-bottom: clamp(2.5rem, 4vw, 4rem);
   }
-  .tagline { font-size: clamp(1.85rem, 2.4vw, 2.25rem); }
+  .tagline { font-size: clamp(2.25rem, 2.8vw, 2.85rem); }
 }
 
 @media (min-width: 1440px) {
@@ -801,6 +786,5 @@ a:hover {
 /* ---------- Reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; }
-  .logo:hover,
   .social-link:hover { transform: none; }
 }

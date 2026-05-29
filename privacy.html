@@ -59,9 +59,9 @@
        launch URL when a visitor pins the site to their home screen. -->
   <link rel="manifest" href="/manifest.webmanifest" />
 
-  <!-- Preload latin webfont subsets — see comment in index.html. -->
-  <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+  <!-- Preload body fonts (Geist + Geist Mono) — see comment in index.html. -->
+  <link rel="preload" href="assets/fonts/geist-sans.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/geist-mono.woff2" as="font" type="font/woff2" crossorigin />
 
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
@@ -109,13 +109,9 @@
     <section class="block" aria-labelledby="h-summary">
       <h2 id="h-summary" class="section"><span class="caret" aria-hidden="true"></span>summary</h2>
       <p>
-        This site doesn't track you. We don't set cookies, run analytics, or
-        load tracking pixels. The only personal data we receive is what you
-        send us by email &mdash; either through the contact form on the home
-        page, which simply opens your mail client with a draft, or by
-        emailing
-        <a href="mailto:info@dhiphos.com">info@dhiphos.com</a> directly.
-        That email is used to respond to your inquiry, and nothing else.
+        This site sets no cookies, runs no analytics, and loads no
+        third-party trackers. The only personal data we receive is email
+        you choose to send us.
       </p>
     </section>
 
@@ -123,9 +119,7 @@
       <h2 id="h-who" class="section"><span class="caret" aria-hidden="true"></span>who we are</h2>
       <p>
         This website is operated by <strong>Dhiphos Private Limited</strong>,
-        a company registered in Bengaluru, India. For any privacy-related
-        question, contact us at
-        <a href="mailto:info@dhiphos.com">info@dhiphos.com</a>.
+        a company registered in Bengaluru, India.
       </p>
     </section>
 
@@ -135,11 +129,10 @@
       <div class="entry">
         <h3 class="entry-title">contact-form</h3>
         <p>
-          The contact form on the home page does not transmit any data to
-          our servers. It validates the email address you typed and then
-          opens your default email client with a short pre-filled draft
-          addressed to <code>info@dhiphos.com</code>. Whether you choose to
-          send that draft is entirely up to you.
+          The home-page contact form does not transmit data to our servers.
+          It opens your mail client with a draft addressed to
+          <code>info@dhiphos.com</code>; only sending that draft transmits
+          anything.
         </p>
       </div>
 
@@ -147,9 +140,9 @@
         <h3 class="entry-title">direct-email</h3>
         <p>
           When you email us, we receive your email address and whatever you
-          choose to include in the message body. We retain this only for as
-          long as needed to respond and to keep a reasonable record of the
-          correspondence.
+          choose to include in the message body. We retain inquiry email
+          for up to 24 months, after which it is deleted unless an active
+          engagement exists or law requires longer retention.
         </p>
       </div>
 
@@ -166,8 +159,8 @@
       <div class="entry">
         <h3 class="entry-title">no-cookies</h3>
         <p>
-          We do not set any cookies. We do not use Google Analytics, Meta
-          Pixel, Hotjar, or any similar tracking service.
+          We do not set cookies, and we do not use analytics, pixel
+          trackers, or session-replay tools.
         </p>
       </div>
     </section>
@@ -188,18 +181,10 @@
         <h3 class="entry-title">hosting</h3>
         <p>
           The site is hosted on <strong>GitHub Pages</strong> (operated by
-          GitHub, Inc.). The host receives the standard server-log fields
-          described above. GitHub's privacy practices apply to those logs.
-        </p>
-      </div>
-
-      <div class="entry">
-        <h3 class="entry-title">linkedin</h3>
-        <p>
-          Our footer links to our LinkedIn company page. The link opens in
-          a new tab. We don't embed LinkedIn widgets or trackers on this
-          site, so simply viewing dhiphos.com does not share data with
-          LinkedIn.
+          GitHub, Inc.) and served from a global CDN, which may briefly
+          route requests through nodes outside India. The host receives the
+          standard server-log fields described above; GitHub's privacy
+          practices apply to those logs.
         </p>
       </div>
 
@@ -239,7 +224,6 @@
       <p>
         If we update this notice, we will post the new version on this page
         and refresh the &ldquo;Last updated&rdquo; date at the top.
-        Material changes will be highlighted briefly on the home page.
       </p>
     </section>
 

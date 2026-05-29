@@ -56,15 +56,14 @@
        launch URL when a visitor pins the site to their home screen. -->
   <link rel="manifest" href="/manifest.webmanifest" />
 
-  <!-- Preload the latin subsets of both webfonts so the browser starts
+  <!-- Preload the body fonts (Geist + Geist Mono) so the browser starts
        fetching them in parallel with the stylesheet, rather than waiting
-       for CSS to load and discover the @font-face URLs. The latin-ext
-       subsets are not preloaded — they're only requested when a page
-       contains a character that falls in their unicode-range, which
-       this site (English-only ASCII + a few common punctuation glyphs
-       already covered by the latin subset) currently does not. -->
-  <link rel="preload" href="assets/fonts/space-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="preload" href="assets/fonts/jetbrains-mono-latin.woff2" as="font" type="font/woff2" crossorigin />
+       for CSS to load and discover the @font-face URLs. Space Grotesk is
+       not preloaded — it's used only on the topnav wordmark, which has
+       a system-font fallback that looks fine for the brief moment before
+       the brand face loads. -->
+  <link rel="preload" href="assets/fonts/geist-sans.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/geist-mono.woff2" as="font" type="font/woff2" crossorigin />
 
   <link rel="stylesheet" href="assets/css/styles.css" />
 </head>
@@ -106,8 +105,8 @@
       </p>
 
       <p class="hero-actions">
-        <a class="btn btn-primary" href="#contact">Get in touch &rarr;</a>
-        <a class="btn-link" href="#offerings">Explore offerings &rarr;</a>
+        <a class="btn btn-primary" href="#contact">Get in touch <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="btn-link" href="#offerings">Explore offerings</a>
       </p>
     </section>
 
@@ -119,7 +118,7 @@
         for Industry 4.0.
       </p>
 
-      <p class="chip-rail-eyebrow">// layers</p>
+      <p class="chip-rail-eyebrow">layers</p>
       <ul class="chip-rail" aria-label="Offerings layers">
         <li class="chip">mes-mom</li>
         <li class="chip">iiot-edge</li>
@@ -187,8 +186,8 @@
         software stack.
       </p>
 
-      <p class="chip-rail-eyebrow">// SAP manufacturing suite</p>
-      <ul class="chip-rail" aria-label="SAP Manufacturing Suite expertise">
+      <p class="chip-rail-eyebrow">platform expertise</p>
+      <ul class="chip-rail" aria-label="Platform expertise">
         <li class="chip">SAP PEO</li>
         <li class="chip">SAP DM</li>
         <li class="chip">SAP MII</li>
@@ -196,7 +195,7 @@
         <li class="chip">SAP BTP</li>
       </ul>
 
-      <p class="chip-rail-eyebrow">// practice areas</p>
+      <p class="chip-rail-eyebrow">practice areas</p>
       <ul class="chip-rail" aria-label="Services practice areas">
         <li class="chip">specialized-implementation</li>
         <li class="chip">custom-integration</li>
@@ -267,12 +266,12 @@
         and digital twin architectures.
       </p>
 
-      <p class="chip-rail-eyebrow">// expertise</p>
+      <p class="chip-rail-eyebrow">expertise</p>
       <ul class="chip-rail" aria-label="Team expertise">
         <li class="chip">industry-4.0</li>
         <li class="chip">iiot</li>
-        <li class="chip">connected factory</li>
-        <li class="chip">SAP Mfg.</li>
+        <li class="chip">connected-factory</li>
+        <li class="chip">sap-mfg</li>
       </ul>
 
       <figure class="illus illus-team">
@@ -344,7 +343,7 @@
             placeholder="you@company.com"
             required
           />
-          <button type="submit" class="btn btn-primary">Send inquiry &rarr;</button>
+          <button type="submit" class="btn btn-primary">Send inquiry <span class="btn-arrow" aria-hidden="true">&rarr;</span></button>
         </div>
         <p class="signup-status" id="signup-status" role="status" aria-live="polite"></p>
 
