@@ -754,6 +754,124 @@ a:hover {
 }
 .social-icon { display: block; }
 
+/* ---------- Consent banner ----------
+   Modeless dialog that asks the visitor to accept or decline
+   Google Analytics. Default-denied is set in the gtag snippet in
+   <head>; this banner just persists the visitor's choice and
+   calls gtag('consent', 'update', ...). DOM is injected by
+   assets/js/consent.js.
+
+   Design notes:
+     - Lives at the bottom of the viewport, centered to the prose
+       column on tablet/desktop, edge-to-edge on phones.
+     - Two buttons of equal weight (Decline / Accept) — France's
+       CNIL and other DPAs have fined sites for "Accept" being
+       visually dominant. Accept is the right-most button (matches
+       the site's primary-action positioning) but the same .btn
+       footprint as Decline.
+     - Slides up + fades in on first paint; reverse on dismiss. */
+
+.consent {
+  position: fixed;
+  left: var(--pad-x);
+  right: var(--pad-x);
+  bottom: clamp(0.75rem, 2vw, 1.25rem);
+  z-index: 100;
+  max-width: 640px;
+  margin: 0 auto;
+  background: var(--bg);
+  color: var(--fg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  box-shadow: 0 12px 36px -14px rgba(0, 0, 0, 0.22),
+              0 2px 6px -2px rgba(0, 0, 0, 0.08);
+  transform: translateY(16px);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 200ms ease, opacity 200ms ease;
+}
+.consent.is-visible {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.consent-inner {
+  padding: 1rem 1.15rem 1.1rem;
+}
+
+.consent-title {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.01em;
+  color: var(--muted);
+  margin: 0 0 0.45rem;
+  text-transform: lowercase;
+}
+.consent-title .caret {
+  margin-right: 0.5rem;
+  vertical-align: 0.05em;
+}
+
+.consent-body {
+  margin: 0 0 0.9rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--fg);
+}
+.consent-body a {
+  color: var(--fg);
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  transition: color 120ms ease, border-color 120ms ease;
+}
+.consent-body a:hover,
+.consent-body a:focus-visible {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.consent-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  justify-content: flex-end;
+}
+.consent-actions .btn { font-size: 0.95rem; }
+
+/* Phones: pin to the bottom edge, fill the width, and let the
+   buttons share the row equally — easier to thumb-tap than a
+   right-aligned cluster. */
+@media (max-width: 540px) {
+  .consent {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    max-width: none;
+    margin: 0;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
+    border-radius: 6px 6px 0 0;
+  }
+  .consent-actions { gap: 0.5rem; }
+  .consent-actions .btn {
+    flex: 1 1 0;
+    min-width: 0;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .consent {
+    box-shadow: 0 12px 36px -12px rgba(0, 0, 0, 0.7),
+                0 2px 6px -2px rgba(0, 0, 0, 0.4);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .consent { transition: none; }
+}
+
 /* ---------- Desktop polish ----------
    The site is designed mobile-first as a single 64ch reading column.
    On wide viewports that column starts to feel stranded in empty

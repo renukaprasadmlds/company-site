@@ -1,15 +1,29 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) — Consent Mode v2.
+       See index.html for the full rationale. Default-denied for
+       analytics + ad signals; assets/js/consent.js asks the
+       visitor and updates the consent state. -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHVMTXCPLV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+
+    gtag('js', new Date());
     gtag('config', 'G-GHVMTXCPLV');
   </script>
+  <script src="assets/js/consent.js" defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Dhiphos — Privacy</title>
@@ -126,11 +140,14 @@
       <h2 id="h-summary" class="section"><span class="caret" aria-hidden="true"></span>summary</h2>
       <p>
         This site uses Google Analytics (GA4) to understand how visitors
-        find and move through our pages. We do not run advertising
-        pixels, session-replay tools, or other third-party trackers,
-        and we do not sell or share your data for marketing. Beyond
-        analytics, the only personal data we receive is the email you
-        choose to send us.
+        find and move through our pages. Analytics is loaded with all
+        cookies <strong>blocked by default</strong>; we ask for your
+        consent via a banner on first visit and only set Analytics
+        cookies if you accept. We do not run advertising pixels,
+        session-replay tools, or other third-party trackers, and we
+        do not sell or share your data for marketing. Beyond analytics,
+        the only personal data we receive is the email you choose to
+        send us.
       </p>
     </section>
 
@@ -181,31 +198,51 @@
           We use <strong>Google Analytics 4</strong> (property
           <code>G-GHVMTXCPLV</code>) to measure aggregate traffic
           &mdash; pages viewed, referrers, approximate region, device
-          and browser type, and similar usage signals. Google Analytics
-          sets cookies in your browser and processes a truncated
-          version of your IP address; it does not receive your name,
-          email, or other directly identifying information from us.
-          Google acts as a data processor on our behalf, and may also
-          process the data as an independent controller under its own
-          terms; see Google's
+          and browser type, and similar usage signals. We deploy GA
+          via <strong>Google Consent Mode v2</strong> with all storage
+          categories denied by default; cookies are only set after you
+          accept analytics in our consent banner. Even then, Google
+          Analytics processes a truncated version of your IP address,
+          and never receives your name, email, or other directly
+          identifying information from us. Google acts as a data
+          processor on our behalf, and may also process the data as an
+          independent controller under its own terms; see Google's
           <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">privacy policy</a>
           and
           <a href="https://business.safety.google/privacy/" target="_blank" rel="noopener noreferrer">business privacy notices</a>
-          for details. You can opt out by installing Google's
-          <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Analytics opt-out browser add-on</a>,
-          by blocking analytics cookies in your browser, or by using
-          a tracker-blocking extension.
+          for details.
+        </p>
+      </div>
+
+      <div class="entry">
+        <h3 class="entry-title">consent</h3>
+        <p>
+          On your first visit, a banner asks whether you'd like to allow
+          analytics cookies. You can choose <em>Decline</em> or
+          <em>Accept analytics</em>; both choices are remembered for
+          12 months in your browser's <code>localStorage</code> (key
+          <code>dhiphos:consent</code>). To change your decision later,
+          use the
+          <a href="#" data-consent-open>Cookie preferences</a>
+          link in the footer of any page. We honor the
+          <strong>Global Privacy Control</strong> (GPC) signal: if your
+          browser sends GPC, we treat that as an automatic decline and
+          don't show the banner.
         </p>
       </div>
 
       <div class="entry">
         <h3 class="entry-title">cookies</h3>
         <p>
-          We do not set first-party cookies of our own. The only
-          cookies set on this site come from Google Analytics
-          (typically <code>_ga</code> and <code>_ga_*</code>), used
-          to distinguish unique visitors and sessions. We do not use
-          advertising pixels or session-replay tools.
+          We do not set first-party cookies of our own. If you accept
+          analytics, Google Analytics sets cookies (typically
+          <code>_ga</code> and <code>_ga_*</code>) used to distinguish
+          unique visitors and sessions. If you decline, no analytics
+          cookies are set. We do not use advertising pixels or
+          session-replay tools. You can also opt out at the browser
+          level by installing Google's
+          <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Analytics opt-out browser add-on</a>
+          or by using a tracker-blocking extension.
         </p>
       </div>
     </section>
@@ -320,6 +357,8 @@
         &copy; <span id="year"></span> &middot; Dhiphos Private Limited &middot; Bengaluru, India
         <span class="foot-sep" aria-hidden="true"></span>
         <a href="privacy.html">Privacy</a>
+        <span class="foot-sep" aria-hidden="true"></span>
+        <a href="#h-collect" data-consent-open>Cookie preferences</a>
       </p>
       <p class="foot-credit">
         Illustrations generated with Google Gemini.
