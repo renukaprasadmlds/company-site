@@ -22,7 +22,14 @@
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dhiphos.com/404.html" />
   <meta property="og:site_name" content="Dhiphos" />
-  <meta name="twitter:card" content="summary" />
+  <!-- Same brand card as the home page. The 404 itself isn't really
+       intended to be shared, but if a stale link does get unfurled
+       we'd rather show the brand than a missing-image placeholder. -->
+  <meta property="og:image" content="https://dhiphos.com/assets/img/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Dhiphos — Industrial software for modern manufacturing" />
+  <meta name="twitter:card" content="summary_large_image" />
 
   <link rel="icon" type="image/svg+xml" href="assets/img/logo-light.svg" />
   <link rel="icon" type="image/svg+xml" href="assets/img/logo-light.svg" media="(prefers-color-scheme: light)" />
