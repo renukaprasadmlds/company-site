@@ -32,6 +32,18 @@
        URL bar matches the page background in either system theme. -->
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+
+  <!-- Favicons. SVG is the primary icon — it scales crisply for any
+       size, including Google's 48×48 minimum for search results.
+       PNG fallbacks cover legacy browsers, Googlebot when SVG isn't
+       picked up, and the iOS home-screen shortcut. The manifest
+       link activates assets referenced in manifest.webmanifest for
+       installable / PWA contexts. -->
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/favicon-48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+
   <meta name="robots" content="index,follow" />
   <link rel="canonical" href="https://dhiphos.com/privacy.html" />
 
@@ -74,20 +86,6 @@
     "description": "Industrial software for modern manufacturing — MES/MOM, IIoT edge, digital twins, physical AI. Strictly software, hardware-agnostic."
   }
   </script>
-
-  <!-- Real brand mark in the favicon slot. SVG-first for sharpness on
-       high-DPI screens; theme-aware variant via the `media` attribute
-       (Safari respects this; Chrome/Firefox fall back to the default).
-       The light variant has its dark `#333` box so it reads cleanly
-       on white tab strips. -->
-  <link rel="icon" type="image/svg+xml" href="assets/img/logo-light.svg" />
-  <link rel="icon" type="image/svg+xml" href="assets/img/logo-light.svg" media="(prefers-color-scheme: light)" />
-  <link rel="icon" type="image/svg+xml" href="assets/img/logo-dark.svg"  media="(prefers-color-scheme: dark)" />
-  <link rel="apple-touch-icon" href="assets/img/logo-light.svg" />
-
-  <!-- PWA-lite manifest. Lets mobile browsers serve a proper icon +
-       launch URL when a visitor pins the site to their home screen. -->
-  <link rel="manifest" href="/manifest.webmanifest" />
 
   <!-- Preload body fonts (Geist + Geist Mono) — see comment in index.html. -->
   <link rel="preload" href="assets/fonts/geist-sans.woff2" as="font" type="font/woff2" crossorigin />
