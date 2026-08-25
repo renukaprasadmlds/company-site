@@ -498,6 +498,14 @@ a:hover {
   max-width: 60ch;
 }
 
+.block-lede-tight {
+  margin-bottom: 1rem;
+}
+
+.faq-list.is-spaced {
+  margin-top: 2rem;
+}
+
 .entry {
   padding: 1.1rem 0;
   border-top: 1px solid var(--rule);

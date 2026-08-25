@@ -20,8 +20,8 @@
   <script src="assets/js/consent.js" defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dhiphos — SAP manufacturing modernization without stopping the line</title>
-  <meta name="description" content="Dhiphos modernizes manufacturing software — SAP DM, MII, ME, PEO, BTP, MES/MOM, edge, and digital twins — without halting production. Builder-to-builder." />
+  <title>Dhiphos — SAP ME/MII modernization for manufacturing</title>
+  <meta name="description" content="Dhiphos helps manufacturers migrate SAP ME and MII before end of support — to SAP Digital Manufacturing, SAP BTP, or both — without stopping production." />
   <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
   <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
 
@@ -31,8 +31,8 @@
   <link rel="manifest" href="/manifest.webmanifest" />
   <link rel="canonical" href="https://dhiphos.com/" />
 
-  <meta property="og:title" content="Dhiphos — SAP manufacturing modernization without stopping the line" />
-  <meta property="og:description" content="Hands-on SAP DM, MII, ME, PEO, and BTP implementation. Migrate and modernize without stopping the line." />
+  <meta property="og:title" content="Dhiphos — SAP ME/MII modernization for manufacturing" />
+  <meta property="og:description" content="Migrate SAP ME and MII to SAP Digital Manufacturing, SAP BTP, or both — without stopping the line." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dhiphos.com/" />
   <meta property="og:site_name" content="Dhiphos" />
@@ -56,7 +56,39 @@
       "addressCountry": "IN"
     },
     "sameAs": ["https://www.linkedin.com/company/dhiphos"],
-    "description": "Industrial software for modern manufacturing — SAP Manufacturing Suite, MES/MOM, IIoT edge, digital twins. Strictly software, hardware-agnostic."
+    "description": "Founder-led industrial software practice specializing in SAP ME/MII modernization to SAP Digital Manufacturing and SAP BTP."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is happening to SAP ME and SAP MII?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SAP Manufacturing Execution and SAP Manufacturing Integration and Intelligence are being retired. Version 15.5 is the final release. Mainstream maintenance ends in 2027; extended support runs through 31 December 2030. SAP positions Digital Manufacturing as the strategic successor and offers a Customer Evolution Kit to help plan the transition."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do we always migrate everything to SAP Digital Manufacturing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Mostly standard MES footprints usually move fully to SAP Digital Manufacturing. Heavily custom MII applications often rebuild on SAP BTP. Mixed landscapes commonly use both — DM for standard execution and BTP for extensions — decided by fit-gap on how standard versus custom the existing application is."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can we migrate without stopping production?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Phased coexistence keeps legacy ME/MII running alongside the chosen target — SAP DM, BTP applications, or both — while a pilot line is proven, then scaled plant by plant."
+        }
+      }
+    ]
   }
   </script>
 
@@ -81,10 +113,10 @@
       <span class="nav-toggle-bars" aria-hidden="true"></span>
     </button>
     <nav class="topnav-nav" id="primary-nav" aria-label="Section navigation">
+      <a href="#migration">Migration</a>
       <a href="#engage">Engage</a>
       <a href="#services">Services</a>
-      <a href="work.html">Work</a>
-      <a href="sap-dm-migration.html">Migration</a>
+      <a href="#work">Work</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -93,71 +125,168 @@
 
     <section class="hero" aria-labelledby="hero-h1">
       <h1 id="hero-h1" class="tagline">
-        Migrate your shop floor to SAP Digital Manufacturing — without stopping the line.
+        Modernize SAP ME and MII before support ends — without stopping the line.
       </h1>
       <p class="lede">
-        Hands-on architecture and implementation across SAP DM, MII, ME, PEO, and BTP.
-        Builder-to-builder. Remote-friendly. Global clients.
+        Dhiphos is a founder-led engineering practice for manufacturing software.
+        We help plants move from SAP ME and MII to SAP Digital Manufacturing,
+        SAP BTP, or both — chosen by how standard or custom your landscape is.
       </p>
       <p class="hero-actions">
         <a class="btn btn-primary" href="#contact">Start a conversation <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
-        <a class="btn-link" href="sap-dm-migration.html">SAP DM migration</a>
+        <a class="btn-link" href="#migration">Migration paths</a>
       </p>
     </section>
 
     <ul class="trust-strip" aria-label="At a glance">
+      <li><strong>Focus</strong> SAP ME · MII · DM · PEO · BTP</li>
       <li><strong>Industries</strong> Aerospace · Automotive · Pharma</li>
-      <li><strong>Platform</strong> SAP PEO · DM · MII · ME · BTP</li>
-      <li><strong>Response</strong> Typically within one business day</li>
+      <li><strong>Response</strong> Within one business day</li>
     </ul>
 
-    <section class="block" id="problem" aria-labelledby="h-problem">
-      <h2 id="h-problem" class="section"><span class="caret" aria-hidden="true"></span>The migration window is open</h2>
+    <!-- ========== MIGRATION ========== -->
+    <section class="block" id="migration" aria-labelledby="h-migration">
+      <h2 id="h-migration" class="section"><span class="caret" aria-hidden="true"></span>Migration</h2>
+      <p class="block-lede">
+        SAP has confirmed that ME and MII version 15.5 is the final release.
+        Mainstream maintenance ends in 2027; extended support runs through
+        31 December 2030. SAP Digital Manufacturing is the strategic cloud MES
+        successor. The transition is not a like-for-like upgrade — it is a
+        redesign decision you still control if you start now.
+      </p>
+
       <div class="problem-callout">
         <p>
-          SAP Manufacturing Execution and MII are retiring. Version 15.5 is the final release.
-          Manufacturing IT leaders now face a scheduled decision: move on your timeline — or under
-          end-of-support pressure.
+          The right landing zone depends on your footprint. Mostly standard MES
+          work usually maps to <strong>SAP Digital Manufacturing</strong>.
+          Heavily custom MII applications often rebuild on <strong>SAP BTP</strong>.
+          Mixed plants commonly need <strong>both</strong>.
         </p>
-        <p>
-          The right landing zone is not always “everything to DM.” Depending on how standard or
-          custom your existing apps are, the path may be <strong>fully to SAP DM</strong>,
-          <strong>fully to SAP BTP</strong>, or <strong>both</strong>.
-        </p>
-        <p>
-          <a class="btn-link" href="sap-dm-migration.html">See migration paths and coexistence</a>
-        </p>
+      </div>
+
+      <h3 class="entry-title-plain is-spaced">Three paths</h3>
+      <p class="block-lede block-lede-tight">
+        Fit-gap decides the split — how standard versus custom the existing
+        application is — before you commit to a target architecture.
+      </p>
+      <ul class="path-grid">
+        <li class="path-card">
+          <p class="path-fit">Mostly standard</p>
+          <h3>Fully to SAP DM</h3>
+          <p>
+            When ME/MII is used mainly for MES/MOM execution — orders, WIP,
+            routing, quality, operator guidance — map to SAP Digital Manufacturing
+            as the cloud MES successor (aligned with SAP’s Customer Evolution Kit).
+          </p>
+          <p>
+            Best when plants can adopt standard DM capabilities with configuration
+            rather than rewriting plant-specific code.
+          </p>
+        </li>
+        <li class="path-card">
+          <p class="path-fit">Heavily custom</p>
+          <h3>Fully to SAP BTP</h3>
+          <p>
+            When MII was primarily a custom application platform — plant-specific
+            UIs, bespoke transactions, composition logic that does not map to DM
+            standards — rebuild on SAP BTP (CAP, Integration Suite, Event Mesh, UI5).
+          </p>
+          <p>
+            Best when the value sits in your custom apps, not in standard MES features.
+          </p>
+        </li>
+        <li class="path-card">
+          <p class="path-fit">Mixed landscape</p>
+          <h3>DM and BTP together</h3>
+          <p>
+            The most common outcome: standard execution on DM, extensions and heavy
+            custom logic on BTP, with phased coexistence until each plant is ready.
+          </p>
+          <p>
+            Fit-gap splits what becomes DM configuration, what becomes BTP services,
+            and what stays temporarily on legacy ME/MII.
+          </p>
+        </li>
+      </ul>
+
+      <h3 class="entry-title-plain is-spaced">Phased coexistence</h3>
+      <p class="block-lede">
+        We do not recommend a big-bang cutover. Legacy ME/MII runs alongside the
+        chosen target until a pilot line proves the model — whether that target is
+        DM, BTP applications, or both.
+      </p>
+      <figure class="diagram">
+        <img class="diagram-light" src="assets/img/diagrams/migration-coexistence.svg" width="640" height="220" alt="Architecture: ERP to SAP DM to edge to machines, with legacy MII in coexistence." loading="lazy" decoding="async" />
+        <img class="diagram-dark" src="assets/img/diagrams/migration-coexistence-dark.svg" width="640" height="220" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <figcaption class="diagram-caption">Target architecture with legacy coexistence</figcaption>
+      </figure>
+
+      <h3 class="entry-title-plain">Timeline</h3>
+      <ul class="timeline">
+        <li>
+          <strong>Final release: 15.5</strong>
+          <p>No further ME/MII feature releases. Innovation moves to SAP Digital Manufacturing on BTP.</p>
+        </li>
+        <li>
+          <strong>Mainstream maintenance ends 2027</strong>
+          <p>Plan transformation while specialist capacity and project calendars are still under your control.</p>
+        </li>
+        <li>
+          <strong>Extended support through 31 Dec 2030</strong>
+          <p>Limited, premium maintenance only. Waiting until late in the window raises cost and cutover risk.</p>
+        </li>
+      </ul>
+
+      <div class="faq-list is-spaced">
+        <details>
+          <summary>Do we always move everything to SAP DM?</summary>
+          <p>No. Standard MES footprints usually go to DM. Heavy custom MII often rebuilds on BTP. Mixed landscapes commonly use both — decided in fit-gap.</p>
+        </details>
+        <details>
+          <summary>Can we migrate without stopping production?</summary>
+          <p>Yes. Phased coexistence keeps legacy systems live while you prove one line, then scale plant by plant.</p>
+        </details>
+        <details>
+          <summary>What about shop-floor connectivity?</summary>
+          <p>We design software-defined edge layers (OPC UA, MQTT, and related patterns) so you are not forced into a hardware refresh.</p>
+        </details>
+        <details>
+          <summary>How do we start?</summary>
+          <p>Discover (fit-gap on standard vs custom) → Prove (bounded pilot) → Scale (embedded delivery or fixed-scope SOW).</p>
+        </details>
       </div>
     </section>
 
+    <!-- ========== ENGAGE ========== -->
     <section class="block" id="engage" aria-labelledby="h-engage">
       <h2 id="h-engage" class="section"><span class="caret" aria-hidden="true"></span>How we engage</h2>
       <p class="block-lede">
-        A clear path from first conversation to production — sized for mid-market manufacturers
-        who need senior engineers, not a rotating bench.
+        A clear path from first conversation to production — sized for manufacturers
+        who need senior engineers on the work, not a rotating bench.
       </p>
       <ol class="engage-grid">
         <li class="engage-card">
           <p class="engage-step">01</p>
           <h3>Discover</h3>
-          <p>Fit-gap workshop covering your current MES landscape, S/4HANA readiness, and a phased roadmap.</p>
+          <p>Fit-gap on your ME/MII landscape: what is standard, what is custom, and which path — DM, BTP, or both — fits.</p>
           <p class="engage-meta">Typical: 1–2 days</p>
         </li>
         <li class="engage-card">
           <p class="engage-step">02</p>
           <h3>Prove</h3>
-          <p>Bounded proof of concept on one line or cell — validate connectivity, data model, and operator flow before scale.</p>
+          <p>Bounded pilot on one line or cell — validate connectivity, data model, and operator flow before scale.</p>
           <p class="engage-meta">Typical: weeks, fixed scope</p>
         </li>
         <li class="engage-card">
           <p class="engage-step">03</p>
           <h3>Scale</h3>
-          <p>Embedded implementation or SOW delivery across plants — coexistence with legacy MII/ME until cutover is safe.</p>
+          <p>Embedded implementation or SOW delivery across plants, with coexistence until cutover is safe.</p>
           <p class="engage-meta">Typical: months, production-aware</p>
         </li>
       </ol>
     </section>
 
+    <!-- ========== SERVICES ========== -->
     <section class="block" id="services" aria-labelledby="h-services">
       <h2 id="h-services" class="section"><span class="caret" aria-hidden="true"></span>Services</h2>
       <p class="block-lede">
@@ -167,65 +296,68 @@
 
       <p class="chip-rail-eyebrow">Platform expertise</p>
       <ul class="chip-rail" aria-label="Platform expertise">
-        <li class="chip">SAP PEO</li>
         <li class="chip">SAP DM</li>
         <li class="chip">SAP MII</li>
         <li class="chip">SAP ME</li>
+        <li class="chip">SAP PEO</li>
         <li class="chip">SAP BTP</li>
       </ul>
 
       <div class="entry">
         <h3 class="entry-title-plain">Specialized implementation</h3>
         <p>
-          Configuration and deployment of the SAP Manufacturing Suite for production environments —
-          PEO, DM, MII, ME, and BTP — with continuity of the line as a non-negotiable.
+          Configure and deploy SAP Digital Manufacturing, PEO, and BTP for production —
+          including ME/MII transition programs with continuity of the line as a non-negotiable.
         </p>
       </div>
       <div class="entry">
         <h3 class="entry-title-plain">Custom integration</h3>
         <p>
-          Middleware, connectors, and APIs that link legacy industrial systems to modern data
-          environments — fitted to the stack you already run.
+          Middleware, connectors, and APIs between S/4HANA, DM, edge, and remaining
+          legacy execution systems — fitted to the stack you already run.
         </p>
       </div>
       <div class="entry">
         <h3 class="entry-title-plain">System architecture</h3>
         <p>
-          End-to-end software architecture from edge telemetry to ERP. Hardware-agnostic by design.
+          End-to-end software architecture from edge telemetry to ERP.
+          Hardware-agnostic by design; clear split between DM and BTP responsibilities.
         </p>
       </div>
       <div class="entry">
         <h3 class="entry-title-plain">App modernization</h3>
         <p>
-          Migrating and refactoring legacy industrial applications to cloud-native or edge runtimes
+          Refactor MII-era custom logic toward cloud-native or edge runtimes on BTP
           without a risky big-bang cutover.
         </p>
       </div>
     </section>
 
-    <section class="block" id="offerings" aria-labelledby="h-offerings">
-      <h2 id="h-offerings" class="section"><span class="caret" aria-hidden="true"></span>Software layers</h2>
+    <!-- ========== LAYERS ========== -->
+    <section class="block" id="layers" aria-labelledby="h-layers">
+      <h2 id="h-layers" class="section"><span class="caret" aria-hidden="true"></span>Software layers</h2>
       <p class="block-lede">
-        The execution and data layers that digitize a production line — strictly software, hardware-agnostic.
+        The execution and data layers that digitize a production line —
+        strictly software, hardware-agnostic.
       </p>
 
       <figure class="diagram">
-        <img class="diagram-light" src="assets/img/diagrams/software-layers.svg" alt="Diagram of enterprise planning, MES/MOM, edge IIoT, and shop-floor layers." width="640" height="160" loading="lazy" decoding="async" />
+        <img class="diagram-light" src="assets/img/diagrams/software-layers.svg" alt="Layers: enterprise planning, MES/MOM, edge IIoT, and shop floor." width="640" height="160" loading="lazy" decoding="async" />
         <img class="diagram-dark" src="assets/img/diagrams/software-layers-dark.svg" alt="" aria-hidden="true" width="640" height="160" loading="lazy" decoding="async" />
-        <figcaption class="diagram-caption">From ERP planning to the line — software only</figcaption>
+        <figcaption class="diagram-caption">From ERP planning to the line</figcaption>
       </figure>
 
       <div class="entry">
         <h3 class="entry-title-plain">MES / MOM</h3>
         <p>
-          Manufacturing Execution and Operations Management — the bridge between shop-floor
-          operations and enterprise planning.
+          Manufacturing execution and operations management — the bridge between
+          shop-floor operations and enterprise planning, including SAP Digital Manufacturing.
         </p>
       </div>
       <div class="entry">
         <h3 class="entry-title-plain">IIoT and edge</h3>
         <p>
-          Industrial IoT and edge data layers. Processing production telemetry at the source —
+          Industrial IoT and edge data layers. Process production telemetry at the source —
           software-defined and hardware-agnostic.
         </p>
       </div>
@@ -239,50 +371,59 @@
 
       <p class="roadmap-note">
         <strong>Roadmap:</strong> Physical AI — edge inference, predictive modeling, and
-        operator-assist — is on our near-term roadmap, not a shipped product line yet.
+        operator assist — is on our near-term roadmap, not a shipped product line yet.
       </p>
     </section>
 
+    <!-- ========== WORK ========== -->
     <section class="block" id="work" aria-labelledby="h-work">
-      <h2 id="h-work" class="section"><span class="caret" aria-hidden="true"></span>Selected work</h2>
+      <h2 id="h-work" class="section"><span class="caret" aria-hidden="true"></span>Work</h2>
       <p class="block-lede">
-        Representative patterns from aerospace, automotive, and pharmaceutical lines.
-        Client names withheld; outcomes described at the pattern level.
+        Representative patterns from aerospace, automotive, and regulated manufacturing.
+        Client names withheld until publication is approved.
       </p>
       <ul class="case-grid">
         <li class="case-card">
           <p class="case-industry">Aerospace</p>
-          <h3>Unified machine network</h3>
-          <p>Connected dozens of machines to a single digital network with live production dashboards that reduced equipment downtime.</p>
+          <h3>Connected machine network</h3>
+          <p>Challenge: fragmented machine connectivity and limited live visibility across dozens of assets.</p>
+          <p>Outcome: a unified digital network with live production dashboards that reduced equipment downtime.</p>
           <ul class="chip-rail" aria-label="Stack">
-            <li class="chip">connectivity</li>
-            <li class="chip">dashboards</li>
+            <li class="chip">IIoT</li>
+            <li class="chip">OPC UA</li>
+            <li class="chip">Dashboards</li>
           </ul>
         </li>
         <li class="case-card">
           <p class="case-industry">Automotive / discrete</p>
-          <h3>SAP to shop-floor orders</h3>
-          <p>Linked SAP to factory software, automating production orders end-to-end without stopping the line.</p>
+          <h3>SAP-linked production orders</h3>
+          <p>Challenge: manual hand-offs between enterprise planning and factory execution software.</p>
+          <p>Outcome: end-to-end automation of production orders from SAP to the shop floor.</p>
           <ul class="chip-rail" aria-label="Stack">
             <li class="chip">SAP</li>
-            <li class="chip">integration</li>
+            <li class="chip">MES</li>
+            <li class="chip">Integration</li>
           </ul>
         </li>
         <li class="case-card">
-          <p class="case-industry">Regulated industry</p>
-          <h3>Execution continuity</h3>
-          <p>Phased coexistence approaches so modernization proceeds plant-by-plant with audit-aware traceability.</p>
+          <p class="case-industry">Pharmaceutical / regulated</p>
+          <h3>Phased modernization</h3>
+          <p>Challenge: modernize execution systems without a big-bang cutover under compliance pressure.</p>
+          <p>Outcome: coexistence-friendly architecture so plants move when ready, with audit-aware traceability.</p>
           <ul class="chip-rail" aria-label="Stack">
             <li class="chip">MES</li>
-            <li class="chip">coexistence</li>
+            <li class="chip">Coexistence</li>
+            <li class="chip">Architecture</li>
           </ul>
         </li>
       </ul>
       <p class="case-note">
-        <a class="btn-link" href="work.html">View work patterns</a>
+        These cards use public selected-work narrative as placeholders.
+        Approved metrics and logos can drop into this layout without redesign.
       </p>
     </section>
 
+    <!-- ========== TEAM ========== -->
     <section class="block" id="team" aria-labelledby="h-team">
       <h2 id="h-team" class="section"><span class="caret" aria-hidden="true"></span>Team</h2>
       <p class="block-lede">
@@ -305,10 +446,11 @@
       </div>
     </section>
 
+    <!-- ========== CONTACT ========== -->
     <section class="block block-contact" id="contact" aria-labelledby="h-contact">
       <h2 id="h-contact" class="section"><span class="caret" aria-hidden="true"></span>Contact</h2>
       <p class="block-lede">
-        Tell us about your manufacturing stack and what you are trying to solve.
+        Tell us about your ME/MII landscape and what you are trying to solve.
         Submitting opens your email client with a pre-filled message to
         <a href="mailto:info@dhiphos.com">info@dhiphos.com</a>.
         We typically respond within one business day.
@@ -345,7 +487,7 @@
         </div>
         <div class="inquiry-field">
           <label for="stack">Current stack</label>
-          <input id="stack" name="stack" type="text" placeholder="e.g. SAP MII 15.x, OPC UA, S/4HANA" />
+          <input id="stack" name="stack" type="text" placeholder="e.g. SAP MII 15.x, ME, S/4HANA" />
         </div>
         <div class="inquiry-field">
           <label for="message">Message</label>
