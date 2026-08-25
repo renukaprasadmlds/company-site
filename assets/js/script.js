@@ -84,6 +84,52 @@
     sections.forEach(function (s) { observer.observe(s); });
   })();
 
+  // FAQ expand/collapse — animate open and close (native <details> alone snaps shut)
+  (function () {
+    var items = document.querySelectorAll(".faq-item");
+    if (!items.length) return;
+
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    items.forEach(function (item) {
+      var summary = item.querySelector("summary");
+      var body = item.querySelector(".faq-body");
+      if (!summary || !body) return;
+
+      if (item.open) item.classList.add("is-open");
+
+      summary.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        if (item.classList.contains("is-open")) {
+          item.classList.remove("is-open");
+          if (reduce) {
+            item.removeAttribute("open");
+            return;
+          }
+          var done = function (ev) {
+            if (ev.target !== body) return;
+            body.removeEventListener("transitionend", done);
+            item.removeAttribute("open");
+          };
+          body.addEventListener("transitionend", done);
+        } else {
+          item.setAttribute("open", "");
+          if (reduce) {
+            item.classList.add("is-open");
+            return;
+          }
+          // Force a frame so grid-template-rows can transition from 0fr → 1fr
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              item.classList.add("is-open");
+            });
+          });
+        }
+      });
+    });
+  })();
+
   // Custom select — fully themeable (native <option> lists ignore CSS)
   (function () {
     var selects = document.querySelectorAll(".inquiry select");
@@ -95,8 +141,12 @@
         wrap.classList.remove("is-open");
         var list = wrap.querySelector(".select-list");
         var btn = wrap.querySelector(".select-trigger");
-        if (list) list.hidden = true;
         if (btn) btn.setAttribute("aria-expanded", "false");
+        if (list) {
+          window.setTimeout(function () {
+            if (!wrap.classList.contains("is-open")) list.hidden = true;
+          }, 200);
+        }
       });
     }
 
@@ -120,11 +170,8 @@
       if (native.id) {
         trigger.id = native.id + "-trigger";
         var label = document.querySelector('label[for="' + native.id + '"]');
-        if (label) trigger.setAttribute("aria-labelledby", label.id || "");
-        if (label && !label.id) {
-          label.id = native.id + "-label";
-          trigger.setAttribute("aria-labelledby", label.id);
-        }
+        if (label && !label.id) label.id = native.id + "-label";
+        if (label) trigger.setAttribute("aria-labelledby", label.id);
       }
 
       var labelEl = document.createElement("span");
@@ -181,19 +228,27 @@
       syncLabel();
 
       function setOpen(open) {
-        wrap.classList.toggle("is-open", open);
-        list.hidden = !open;
-        trigger.setAttribute("aria-expanded", open ? "true" : "false");
         if (open) {
+          list.hidden = false;
+          trigger.setAttribute("aria-expanded", "true");
+          requestAnimationFrame(function () {
+            wrap.classList.add("is-open");
+          });
           closeAll(wrap);
           var selected = list.querySelector(".select-option.is-selected") ||
             list.querySelector(".select-option");
           if (selected) selected.focus();
+        } else {
+          wrap.classList.remove("is-open");
+          trigger.setAttribute("aria-expanded", "false");
+          window.setTimeout(function () {
+            if (!wrap.classList.contains("is-open")) list.hidden = true;
+          }, 200);
         }
       }
 
       trigger.addEventListener("click", function () {
-        setOpen(list.hidden);
+        setOpen(!wrap.classList.contains("is-open"));
       });
 
       trigger.addEventListener("keydown", function (e) {
