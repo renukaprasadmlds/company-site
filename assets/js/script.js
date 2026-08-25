@@ -1,4 +1,5 @@
-// Dhiphos — progressive enhancement: year, section nav, mobile nav, mailto inquiry.
+// Dhiphos — progressive enhancement: year, section nav, mobile nav,
+// custom select (theme-aligned), mailto inquiry.
 (function () {
   "use strict";
 
@@ -83,6 +84,163 @@
     sections.forEach(function (s) { observer.observe(s); });
   })();
 
+  // Custom select — fully themeable (native <option> lists ignore CSS)
+  (function () {
+    var selects = document.querySelectorAll(".inquiry select");
+    if (!selects.length) return;
+
+    function closeAll(except) {
+      document.querySelectorAll(".select.is-open").forEach(function (wrap) {
+        if (wrap === except) return;
+        wrap.classList.remove("is-open");
+        var list = wrap.querySelector(".select-list");
+        var btn = wrap.querySelector(".select-trigger");
+        if (list) list.hidden = true;
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    selects.forEach(function (native, idx) {
+      if (native.dataset.enhanced === "1") return;
+      native.dataset.enhanced = "1";
+      native.classList.add("select-native");
+      native.tabIndex = -1;
+
+      var wrap = document.createElement("div");
+      wrap.className = "select";
+      wrap.dataset.select = "";
+
+      var listId = "select-list-" + (native.id || idx);
+      var trigger = document.createElement("button");
+      trigger.type = "button";
+      trigger.className = "select-trigger";
+      trigger.setAttribute("aria-haspopup", "listbox");
+      trigger.setAttribute("aria-expanded", "false");
+      trigger.setAttribute("aria-controls", listId);
+      if (native.id) {
+        trigger.id = native.id + "-trigger";
+        var label = document.querySelector('label[for="' + native.id + '"]');
+        if (label) trigger.setAttribute("aria-labelledby", label.id || "");
+        if (label && !label.id) {
+          label.id = native.id + "-label";
+          trigger.setAttribute("aria-labelledby", label.id);
+        }
+      }
+
+      var labelEl = document.createElement("span");
+      labelEl.className = "select-trigger-label";
+      var chevron = document.createElement("span");
+      chevron.className = "select-chevron";
+      chevron.setAttribute("aria-hidden", "true");
+      trigger.appendChild(labelEl);
+      trigger.appendChild(chevron);
+
+      var list = document.createElement("ul");
+      list.className = "select-list";
+      list.id = listId;
+      list.setAttribute("role", "listbox");
+      list.hidden = true;
+
+      function syncLabel() {
+        var opt = native.options[native.selectedIndex];
+        var text = opt ? opt.textContent : "";
+        var empty = !native.value;
+        labelEl.textContent = empty ? (text || "Select…") : text;
+        labelEl.classList.toggle("is-placeholder", empty);
+      }
+
+      Array.prototype.forEach.call(native.options, function (opt, i) {
+        var li = document.createElement("li");
+        li.setAttribute("role", "presentation");
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "select-option";
+        btn.setAttribute("role", "option");
+        btn.dataset.value = opt.value;
+        btn.textContent = opt.textContent;
+        if (!opt.value) btn.classList.add("is-placeholder");
+        if (opt.selected) btn.classList.add("is-selected");
+        btn.setAttribute("aria-selected", opt.selected ? "true" : "false");
+        btn.addEventListener("click", function () {
+          native.selectedIndex = i;
+          native.dispatchEvent(new Event("change", { bubbles: true }));
+          list.querySelectorAll(".select-option").forEach(function (o) {
+            o.classList.remove("is-selected");
+            o.setAttribute("aria-selected", "false");
+          });
+          btn.classList.add("is-selected");
+          btn.setAttribute("aria-selected", "true");
+          syncLabel();
+          closeAll();
+          trigger.focus();
+        });
+        li.appendChild(btn);
+        list.appendChild(li);
+      });
+
+      syncLabel();
+
+      function setOpen(open) {
+        wrap.classList.toggle("is-open", open);
+        list.hidden = !open;
+        trigger.setAttribute("aria-expanded", open ? "true" : "false");
+        if (open) {
+          closeAll(wrap);
+          var selected = list.querySelector(".select-option.is-selected") ||
+            list.querySelector(".select-option");
+          if (selected) selected.focus();
+        }
+      }
+
+      trigger.addEventListener("click", function () {
+        setOpen(list.hidden);
+      });
+
+      trigger.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setOpen(true);
+        }
+      });
+
+      list.addEventListener("keydown", function (e) {
+        var options = Array.prototype.slice.call(list.querySelectorAll(".select-option"));
+        var i = options.indexOf(document.activeElement);
+        if (e.key === "Escape") {
+          e.preventDefault();
+          setOpen(false);
+          trigger.focus();
+        } else if (e.key === "ArrowDown") {
+          e.preventDefault();
+          if (i < options.length - 1) options[i + 1].focus();
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          if (i > 0) options[i - 1].focus();
+          else trigger.focus();
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          options[0].focus();
+        } else if (e.key === "End") {
+          e.preventDefault();
+          options[options.length - 1].focus();
+        }
+      });
+
+      native.parentNode.insertBefore(wrap, native);
+      wrap.appendChild(native);
+      wrap.appendChild(trigger);
+      wrap.appendChild(list);
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest(".select")) closeAll();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeAll();
+    });
+  })();
+
   // Inquiry form → mailto (structured body to info@dhiphos.com)
   var form = document.getElementById("inquiry");
   if (!form) return;
@@ -106,6 +264,14 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   }
 
+  function focusField(name) {
+    var el = form.elements.namedItem(name);
+    if (!el) return;
+    var trigger = document.getElementById(el.id + "-trigger");
+    if (trigger) trigger.focus();
+    else el.focus();
+  }
+
   form.addEventListener("submit", function (e) {
     e.preventDefault();
 
@@ -119,22 +285,22 @@
 
     if (!name) {
       setStatus("Please enter your name.", "err");
-      form.elements.namedItem("name").focus();
+      focusField("name");
       return;
     }
     if (!isValidEmail(email)) {
       setStatus("Please enter a valid work email.", "err");
-      form.elements.namedItem("email").focus();
+      focusField("email");
       return;
     }
     if (!company) {
       setStatus("Please enter your company.", "err");
-      form.elements.namedItem("company").focus();
+      focusField("company");
       return;
     }
     if (!interest) {
       setStatus("Please select a primary interest.", "err");
-      form.elements.namedItem("interest").focus();
+      focusField("interest");
       return;
     }
 
