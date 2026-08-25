@@ -436,23 +436,20 @@
   opacity: 0;
   transform: translateY(-6px);
   pointer-events: none;
-  transition: opacity 180ms ease, transform 180ms ease;
+  visibility: hidden;
+  transition: opacity 180ms ease, transform 180ms ease, visibility 180ms ease;
 }
 
 .select-list[hidden] {
-  display: block; /* keep for transition; hide via opacity when closed */
-  visibility: hidden;
+  display: none;
 }
 
 .select.is-open .select-list {
+  display: block;
   opacity: 1;
   transform: translateY(0);
   pointer-events: auto;
   visibility: visible;
-}
-
-.select-list[hidden]:not(.is-visible) {
-  /* closed state handled by .select.is-open */
 }
 
 @media (prefers-reduced-motion: reduce) {
