@@ -481,13 +481,45 @@ a:hover {
 
 .block { margin: clamp(2rem, 5vw, 3rem) 0; }
 
-/* Section-to-section separator. Hairline rule + extra air so each
-   block reads as a discrete unit on the page. Entry-level rules
-   (top/bottom of the .entry stack) handle sub-section separation. */
+/* Section separators — more air + faded rule + brand diamond */
 .block + .block {
-  border-top: 1px solid var(--rule);
-  padding-top: clamp(2.5rem, 6vw, 4rem);
-  margin-top: clamp(2.5rem, 6vw, 4rem);
+  border-top: 0;
+  margin-top: clamp(3.25rem, 9vw, 6rem);
+  padding-top: clamp(3.25rem, 9vw, 6rem);
+  position: relative;
+}
+
+.block + .block::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--accent) 55%, transparent) 0,
+    var(--border) 2.5rem,
+    var(--border) calc(100% - 2.5rem),
+    transparent 100%
+  );
+}
+
+.block + .block::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--mark-size);
+  height: var(--mark-size);
+  background: var(--accent);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+@supports not (background: linear-gradient(90deg, color-mix(in srgb, red, blue), red)) {
+  .block + .block::before {
+    background: var(--rule);
+  }
 }
 
 .section {
