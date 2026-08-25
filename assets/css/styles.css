@@ -266,14 +266,10 @@ a:hover {
 }
 
 .topnav-nav {
-  display: none;               /* hidden on small screens */
   gap: 1.5rem;
   align-items: center;
   font-family: var(--font-mono);
   font-size: 0.85rem;
-}
-@media (min-width: 640px) {
-  .topnav-nav { display: inline-flex; }
 }
 
 .topnav-nav a {
@@ -359,6 +355,7 @@ a:hover {
   letter-spacing: 0.01em;
   color: var(--muted);
   margin: 0 0 0.55rem;
+  /* Sentence case — not forced lowercase */
 }
 
 .chip {

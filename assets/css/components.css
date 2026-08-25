@@ -1,0 +1,578 @@
+/* Dhiphos — page components (cards, form grid, FAQ, mobile nav, diagrams) */
+
+:root {
+  --surface: #fafafa;
+  --border: #88888833;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface: #242424;
+    --border: #ffffff1f;
+  }
+}
+
+/* Wider wrap for engagement / work grids without breaking prose measure */
+.wrap-wide {
+  max-width: min(72rem, calc(100% - 2 * var(--pad-x)));
+}
+
+/* ---------- Trust strip ---------- */
+
+.trust-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 1.5rem;
+  align-items: baseline;
+  margin: 0 0 clamp(2rem, 5vw, 3rem);
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--rule);
+  list-style: none;
+}
+
+.trust-strip li {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+}
+
+.trust-strip strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--fg);
+  margin-bottom: 0.15rem;
+  letter-spacing: 0;
+}
+
+/* ---------- Engagement cards (Discover → Prove → Scale) ---------- */
+
+.engage-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 0 0 0.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 720px) {
+  .engage-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+}
+
+.engage-card,
+.path-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem 1.15rem 1.35rem;
+}
+
+.path-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 720px) {
+  .path-grid { grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+}
+
+.path-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: var(--fg);
+}
+
+.path-card p {
+  margin: 0 0 0.65rem;
+  color: var(--fg);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.path-card p:last-child { margin-bottom: 0; }
+
+.path-fit {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+.engage-step {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0 0 0.5rem;
+}
+
+.engage-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: var(--fg);
+}
+
+.engage-card p {
+  margin: 0 0 0.75rem;
+  color: var(--fg);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.engage-meta {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* ---------- Case / work cards ---------- */
+
+.case-grid {
+  display: grid;
+  gap: 1rem;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 720px) {
+  .case-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+.case-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 1.25rem 1.15rem 1.35rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.case-industry {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.case-card h3 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--fg);
+  line-height: 1.35;
+}
+
+.case-card p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--fg);
+  line-height: 1.55;
+  flex: 1;
+}
+
+.case-note {
+  font-size: 0.85rem;
+  color: var(--muted);
+  margin: 1.25rem 0 0;
+  max-width: 60ch;
+}
+
+/* ---------- Diagram ---------- */
+
+.diagram {
+  margin: 1.5rem 0 2rem;
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+}
+
+.diagram img,
+.diagram svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.diagram-light { display: block; }
+.diagram-dark  { display: none; }
+@media (prefers-color-scheme: dark) {
+  .diagram-light { display: none; }
+  .diagram-dark  { display: block; }
+}
+
+.diagram-caption {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-align: center;
+  margin: 0.85rem 0 0;
+}
+
+/* ---------- FAQ ---------- */
+
+.faq-list {
+  margin: 1.5rem 0 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+}
+
+.faq-list details {
+  border-bottom: 1px solid var(--rule);
+  padding: 0.9rem 0;
+}
+
+.faq-list summary {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1.02rem;
+  cursor: pointer;
+  list-style: none;
+  color: var(--fg);
+  padding-right: 1.5rem;
+  position: relative;
+}
+
+.faq-list summary::-webkit-details-marker { display: none; }
+
+.faq-list summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-family: var(--font-mono);
+  color: var(--accent);
+}
+
+.faq-list details[open] summary::after { content: "−"; }
+
+.faq-list summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.faq-list details p {
+  margin: 0.65rem 0 0.25rem;
+  color: var(--fg);
+  max-width: 62ch;
+  line-height: 1.65;
+  font-size: 0.98rem;
+}
+
+/* ---------- Inquiry form (mailto) ---------- */
+
+.inquiry {
+  display: grid;
+  gap: 1rem;
+  max-width: 36rem;
+  margin: 0 0 1.25rem;
+}
+
+.inquiry-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.inquiry-field label {
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.inquiry-field .req {
+  color: var(--accent);
+}
+
+.inquiry input,
+.inquiry select,
+.inquiry textarea {
+  font: inherit;
+  color: var(--fg);
+  background-color: var(--bg);
+  border: 1px solid var(--rule);
+  border-radius: 6px;
+  padding: 0.65rem 0.85rem;
+  width: 100%;
+  transition: border-color 120ms ease;
+  color-scheme: light dark;
+}
+
+.inquiry input:focus,
+.inquiry select:focus,
+.inquiry textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+.inquiry textarea { resize: vertical; min-height: 5.5rem; }
+
+.inquiry select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-color: var(--bg);
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+                    linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 1.1rem) calc(50% - 2px), calc(100% - 0.75rem) calc(50% - 2px);
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 2.25rem;
+}
+
+/* Native option list: match page surface (browsers vary; color-scheme helps) */
+.inquiry select option,
+.inquiry select optgroup {
+  background-color: var(--bg);
+  color: var(--fg);
+}
+
+@media (prefers-color-scheme: dark) {
+  .inquiry select option,
+  .inquiry select optgroup {
+    background-color: #1a1a1a;
+    color: #ffffff;
+  }
+}
+
+.inquiry input:-webkit-autofill,
+.inquiry input:-webkit-autofill:hover,
+.inquiry input:-webkit-autofill:focus {
+  -webkit-text-fill-color: var(--fg);
+  -webkit-box-shadow: 0 0 0 1000px var(--bg) inset;
+  caret-color: var(--fg);
+}
+
+.inquiry-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.inquiry-status {
+  min-height: 1.25em;
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+.inquiry-status.ok  { color: var(--fg); }
+.inquiry-status.err { color: var(--accent); }
+
+.inquiry-hint {
+  font-size: 0.88rem;
+  color: var(--muted);
+  margin: 0;
+  max-width: 40ch;
+}
+
+/* ---------- Problem callout ---------- */
+
+.problem-callout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  padding: 1.15rem 1.25rem;
+  margin: 0 0 1.5rem;
+}
+
+.problem-callout p {
+  margin: 0 0 0.75rem;
+  color: var(--fg);
+  max-width: 60ch;
+}
+
+.problem-callout p:last-child { margin-bottom: 0; }
+
+/* ---------- Roadmap note ---------- */
+
+.roadmap-note {
+  font-size: 0.92rem;
+  color: var(--muted);
+  margin: 1.25rem 0 0;
+  max-width: 58ch;
+}
+
+.roadmap-note strong {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 0.85em;
+  color: var(--fg);
+}
+
+/* ---------- Page hero (inner pages) ---------- */
+
+.page-hero {
+  margin: 0 0 clamp(2rem, 5vw, 3rem);
+  padding-top: clamp(1rem, 3vw, 1.75rem);
+  padding-bottom: clamp(1.75rem, 4vw, 2.5rem);
+  border-bottom: 1px solid var(--rule);
+}
+
+.page-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+  margin: 0 0 0.65rem;
+}
+
+/* ---------- Entry titles: sentence case (less startup) ---------- */
+
+.entry-title-plain {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+
+/* ---------- Mobile navigation ---------- */
+
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-left: auto;
+  padding: 0;
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--fg);
+  cursor: pointer;
+  flex: 0 0 auto;
+  z-index: 2;
+}
+
+.nav-toggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.nav-toggle-bars {
+  display: block;
+  width: 1.1rem;
+  height: 2px;
+  background: currentColor;
+  position: relative;
+  box-shadow: 0 -5px 0 currentColor, 0 5px 0 currentColor;
+}
+
+.topnav.is-open .nav-toggle-bars {
+  background: transparent;
+  box-shadow: none;
+}
+
+.topnav.is-open .nav-toggle-bars::before,
+.topnav.is-open .nav-toggle-bars::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 1.1rem;
+  height: 2px;
+  background: var(--fg);
+}
+
+.topnav.is-open .nav-toggle-bars::before { transform: rotate(45deg); }
+.topnav.is-open .nav-toggle-bars::after  { transform: rotate(-45deg); }
+
+@media (min-width: 720px) {
+  .nav-toggle { display: none; }
+}
+
+/* Show nav as overlay panel on small screens when open */
+@media (max-width: 719px) {
+  .topnav {
+    flex-wrap: wrap;
+    height: auto;
+    min-height: var(--nav-h);
+    padding-top: 0.55rem;
+    padding-bottom: 0.55rem;
+  }
+
+  .topnav-nav {
+    display: none;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 0;
+    padding: 0.5rem 0 0.75rem;
+    border-top: 1px solid var(--rule);
+    margin-top: 0.55rem;
+  }
+
+  .topnav.is-open .topnav-nav {
+    display: flex;
+  }
+
+  .topnav-nav a {
+    padding: 0.7rem 0;
+  }
+
+  .topnav-nav a.is-active::after { display: none; }
+}
+
+@media (min-width: 720px) {
+  .topnav-nav { display: inline-flex; }
+}
+
+/* Timeline (migration page) */
+.timeline {
+  margin: 1.5rem 0;
+  padding: 0;
+  list-style: none;
+  border-left: 2px solid var(--border);
+}
+
+.timeline li {
+  position: relative;
+  padding: 0 0 1.35rem 1.25rem;
+}
+
+.timeline li:last-child { padding-bottom: 0; }
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: -0.4rem;
+  top: 0.35rem;
+  width: 0.55rem;
+  height: 0.55rem;
+  background: var(--accent);
+  transform: rotate(45deg);
+}
+
+.timeline strong {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.timeline p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}

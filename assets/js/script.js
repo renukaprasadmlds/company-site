@@ -1,21 +1,42 @@
-// Dhiphos — small bits of progressive enhancement.
-// No frameworks. No tracking. Plain DOM.
-
+// Dhiphos — progressive enhancement: year, section nav, mobile nav, mailto inquiry.
 (function () {
   "use strict";
 
-  // Footer year stamp.
   var yearEl = document.getElementById("year");
   if (yearEl) {
     yearEl.textContent = String(new Date().getFullYear());
   }
 
-  // Active-section indicator in the topnav.
-  // Watches each <section id="…"> referenced by a topnav link and
-  // toggles `.is-active` on the matching <a> when that section is the
-  // one currently dominating the viewport. Uses IntersectionObserver
-  // so it costs ~nothing on scroll. Only runs on pages that actually
-  // have same-page anchors in the nav (i.e. the home page).
+  // Mobile nav toggle
+  (function () {
+    var topnav = document.querySelector(".topnav");
+    var toggle = document.querySelector(".nav-toggle");
+    var panel = document.getElementById("primary-nav");
+    if (!topnav || !toggle || !panel) return;
+
+    function setOpen(open) {
+      topnav.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    }
+
+    toggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      setOpen(!topnav.classList.contains("is-open"));
+    });
+
+    panel.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        setOpen(false);
+      });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setOpen(false);
+    });
+  })();
+
+  // Active-section indicator (home page hash nav only)
   (function () {
     if (!("IntersectionObserver" in window)) return;
     var navLinks = document.querySelectorAll('.topnav-nav a[href^="#"]');
@@ -37,8 +58,6 @@
       navLinks.forEach(function (l) { l.classList.remove("is-active"); });
     }
 
-    // Track ratios so the "most visible" section wins when several
-    // are intersecting at once (typical on tall viewports).
     var ratios = {};
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -57,7 +76,6 @@
         linkBySection[bestId].classList.add("is-active");
       }
     }, {
-      // Account for the sticky 56px nav at the top.
       rootMargin: "-72px 0px -45% 0px",
       threshold: [0, 0.15, 0.35, 0.6, 0.85, 1]
     });
@@ -65,17 +83,11 @@
     sections.forEach(function (s) { observer.observe(s); });
   })();
 
-  // Signup form.
-  // For now this is a client-only handler that validates the email and
-  // falls back to a mailto: link so we don't need a backend on day one.
-  // When you're ready, point `endpoint` at a form service (Formspree,
-  // Netlify Forms, your own API, etc.).
-  var form = document.getElementById("signup");
+  // Inquiry form → mailto (structured body to info@dhiphos.com)
+  var form = document.getElementById("inquiry");
   if (!form) return;
 
-  var input  = form.querySelector('input[type="email"]');
-  var status = document.getElementById("signup-status");
-  var endpoint = ""; // e.g. "https://formspree.io/f/xxxxxx"
+  var status = document.getElementById("inquiry-status");
   var contactAddress = "info@dhiphos.com";
 
   function setStatus(message, kind) {
@@ -85,57 +97,64 @@
     if (kind) status.classList.add(kind);
   }
 
+  function val(name) {
+    var el = form.elements.namedItem(name);
+    return el && "value" in el ? String(el.value || "").trim() : "";
+  }
+
   function isValidEmail(value) {
-    // Pragmatic, not RFC-perfect.
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   }
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var value = (input && input.value || "").trim();
 
-    if (!isValidEmail(value)) {
-      setStatus("Please enter a valid email address.", "err");
-      if (input) input.focus();
+    var name = val("name");
+    var email = val("email");
+    var company = val("company");
+    var interest = val("interest");
+    var stack = val("stack");
+    var message = val("message");
+    var source = val("source") || "dhiphos.site";
+
+    if (!name) {
+      setStatus("Please enter your name.", "err");
+      form.elements.namedItem("name").focus();
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setStatus("Please enter a valid work email.", "err");
+      form.elements.namedItem("email").focus();
+      return;
+    }
+    if (!company) {
+      setStatus("Please enter your company.", "err");
+      form.elements.namedItem("company").focus();
+      return;
+    }
+    if (!interest) {
+      setStatus("Please select a primary interest.", "err");
+      form.elements.namedItem("interest").focus();
       return;
     }
 
-    if (endpoint) {
-      setStatus("Sending…", "");
-      fetch(endpoint, {
-        method: "POST",
-        headers: { "Accept": "application/json", "Content-Type": "application/json" },
-        body: JSON.stringify({ email: value, source: "dhiphos.site" })
-      })
-        .then(function (r) {
-          if (!r.ok) throw new Error("network");
-          form.reset();
-          setStatus("Thanks. We'll be in touch.", "ok");
-        })
-        .catch(function () {
-          fallbackToMailto(value);
-        });
-    } else {
-      fallbackToMailto(value);
-    }
-  });
-
-  function fallbackToMailto(email) {
     var subject = encodeURIComponent(
-      "Inquiry: Dhiphos offerings & services"
+      "Dhiphos inquiry — " + interest + " — " + company
     );
     var body = encodeURIComponent(
       "Hello Dhiphos team,\n\n" +
-      "I'd like to learn more about your offerings and services.\n\n" +
-      "Area of interest: \n" +
-      "Brief context: \n\n" +
-      "Best regards,\n" +
-      "[Your name, Company]\n"
+      "Name: " + name + "\n" +
+      "Email: " + email + "\n" +
+      "Company: " + company + "\n" +
+      "Primary interest: " + interest + "\n" +
+      "Current stack: " + (stack || "(not provided)") + "\n" +
+      "Source page: " + source + "\n\n" +
+      "Message:\n" + (message || "(none)") + "\n\n" +
+      "Best regards,\n" + name + "\n"
     );
-    var href = "mailto:" + contactAddress +
-               "?subject=" + subject +
-               "&body=" + body;
+
     setStatus("Opening your email client…", "ok");
-    window.location.href = href;
-  }
+    window.location.href =
+      "mailto:" + contactAddress + "?subject=" + subject + "&body=" + body;
+  });
 })();

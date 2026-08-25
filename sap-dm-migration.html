@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHVMTXCPLV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      ad_user_data: 'denied',
+      ad_personalization: 'denied',
+      analytics_storage: 'denied',
+      functionality_storage: 'granted',
+      security_storage: 'granted',
+      wait_for_update: 500
+    });
+    gtag('js', new Date());
+    gtag('config', 'G-GHVMTXCPLV');
+  </script>
+  <script src="assets/js/consent.js" defer></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SAP DM migration — Dhiphos</title>
+  <meta name="description" content="Migrate from SAP MII and ME to SAP Digital Manufacturing without stopping the line. Phased coexistence, BTP, edge connectivity — Dhiphos." />
+  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+  <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
+  <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/favicon-48.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png" />
+  <link rel="manifest" href="/manifest.webmanifest" />
+  <link rel="canonical" href="https://dhiphos.com/sap-dm-migration.html" />
+  <meta property="og:title" content="SAP DM migration — Dhiphos" />
+  <meta property="og:description" content="MII and ME are retiring. Migrate to SAP Digital Manufacturing with phased coexistence — without stopping the line." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://dhiphos.com/sap-dm-migration.html" />
+  <meta property="og:site_name" content="Dhiphos" />
+  <meta property="og:image" content="https://dhiphos.com/assets/img/og-image.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Why migrate from SAP MII or ME now?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SAP Manufacturing Execution and MII are being retired, with version 15.5 as the final release. SAP provides a Customer Evolution Kit to help transition toward SAP Digital Manufacturing. Migrating on your schedule reduces end-of-support risk."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do we always move everything to SAP DM?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Mostly standard MES footprints usually migrate fully to SAP Digital Manufacturing. Heavily custom MII applications often rebuild on SAP BTP. Mixed landscapes commonly use both — DM for standard execution and BTP for extensions — decided through fit-gap on how standard versus custom the existing application is."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can we migrate without stopping production?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. We advocate phased coexistence: run legacy MII/ME alongside the chosen target — SAP DM, BTP apps, or both — validate on a pilot line, then scale plant-by-plant."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What about shop-floor connectivity?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We design hardware-agnostic edge and IIoT layers (for example OPC UA and MQTT patterns) so machines connect to the execution layer without a wholesale hardware refresh."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do we start?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Start with a Discover workshop (fit-gap on standard vs custom and a roadmap), then a bounded Prove phase on one line or cell, then Scale via embedded delivery or a fixed-scope SOW."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <link rel="preload" href="assets/fonts/geist-sans.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="preload" href="assets/fonts/geist-mono.woff2" as="font" type="font/woff2" crossorigin />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
+</head>
+<body id="top">
+  <a class="skip-link" href="#main">Skip to main content</a>
+  <header class="topnav" aria-label="Primary">
+    <a class="topnav-brand" href="index.html" aria-label="Dhiphos home">
+      <span class="topnav-logo-slot" aria-hidden="true">
+        <img class="topnav-logo topnav-logo-light" src="assets/img/logo-light.svg" alt="" width="33" height="33" />
+        <img class="topnav-logo topnav-logo-dark" src="assets/img/logo-dark.svg" alt="" width="24" height="24" />
+      </span>
+      <span class="topnav-wordmark">Dhiphos</span>
+    </a>
+    <button type="button" class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+    </button>
+    <nav class="topnav-nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html#engage">Engage</a>
+      <a href="index.html#services">Services</a>
+      <a href="work.html">Work</a>
+      <a href="sap-dm-migration.html" aria-current="page">Migration</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main class="wrap" id="main">
+    <header class="page-hero">
+      <p class="page-kicker">SAP Digital Manufacturing</p>
+      <h1 class="tagline">MII and ME are retiring. Migrate without stopping the line.</h1>
+      <p class="lede">
+        Dhiphos helps manufacturing teams move from legacy SAP ME/MII landscapes toward
+        SAP Digital Manufacturing, SAP BTP, or both — chosen by how standard or custom
+        the existing application is. Phased coexistence. Edge connectivity. Senior engineers in the code.
+      </p>
+      <p class="hero-actions">
+        <a class="btn btn-primary" href="#contact">Start a conversation <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="btn-link" href="index.html#engage">How we engage</a>
+      </p>
+    </header>
+
+    <section class="block" aria-labelledby="h-why">
+      <h2 id="h-why" class="section"><span class="caret" aria-hidden="true"></span>Why this matters now</h2>
+      <ul class="timeline">
+        <li>
+          <strong>Final release</strong>
+          <p>SAP ME and MII version 15.5 is the final release. Support timelines create a forced modernization window.</p>
+        </li>
+        <li>
+          <strong>Cloud MES successor</strong>
+          <p>SAP Digital Manufacturing on BTP is the strategic path for standard execution — native S/4HANA alignment and quarterly innovation.</p>
+        </li>
+        <li>
+          <strong>Control the timeline</strong>
+          <p>Starting while you still choose the pace beats rushing under end-of-support pressure.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="block" aria-labelledby="h-paths">
+      <h2 id="h-paths" class="section"><span class="caret" aria-hidden="true"></span>Three migration paths</h2>
+      <p class="block-lede">
+        MII and ME landscapes are rarely identical. The right target depends on how
+        <strong>standard</strong> versus <strong>custom</strong> your existing application is —
+        discovered in fit-gap, not assumed up front.
+      </p>
+      <ul class="path-grid">
+        <li class="path-card">
+          <p class="path-fit">Mostly standard</p>
+          <h3>Fully to SAP DM</h3>
+          <p>
+            When ME/MII is used mainly as MES/MOM execution — orders, WIP, routing,
+            quality, operator UIs — map to <strong>SAP Digital Manufacturing</strong>
+            as the cloud MES successor (SAP Customer Evolution Kit path).
+          </p>
+          <p>
+            Best fit for plants that can adopt standard DM capabilities with
+            configuration rather than rewriting plant-specific code.
+          </p>
+        </li>
+        <li class="path-card">
+          <p class="path-fit">Heavily custom</p>
+          <h3>Fully to SAP BTP</h3>
+          <p>
+            When MII was primarily a <strong>custom application platform</strong> —
+            plant-specific UIs, bespoke transactions, complex composition logic that
+            does not map to DM standards — rebuild on <strong>SAP BTP</strong>
+            (CAP, Integration Suite, Event Mesh, UI5) instead of forcing a square peg into DM.
+          </p>
+          <p>
+            Best fit when the value is in your custom apps, not in standard MES features.
+          </p>
+        </li>
+        <li class="path-card">
+          <p class="path-fit">Mixed landscape</p>
+          <h3>DM and BTP together</h3>
+          <p>
+            The most common real-world outcome: <strong>standard execution on DM</strong>,
+            <strong>extensions and heavy custom logic on BTP</strong>, with phased
+            coexistence until each plant is ready.
+          </p>
+          <p>
+            Fit-gap splits the footprint — what becomes DM configuration, what becomes
+            BTP services, and what stays temporarily on legacy MII/ME.
+          </p>
+        </li>
+      </ul>
+      <p class="case-note">
+        We start with Discover: inventory standard vs custom, score fit to DM, and only then
+        recommend DM-only, BTP-only, or hybrid — so you do not over-buy MES or under-invest in extensions.
+      </p>
+    </section>
+
+    <section class="block" aria-labelledby="h-approach">
+      <h2 id="h-approach" class="section"><span class="caret" aria-hidden="true"></span>Phased coexistence</h2>
+      <p class="block-lede">
+        We do not recommend a risky big-bang cutover. Legacy and target systems run in parallel
+        until the pilot line proves the model — whether the target is DM, BTP apps, or both.
+      </p>
+      <figure class="diagram">
+        <img class="diagram-light" src="assets/img/diagrams/migration-coexistence.svg" width="640" height="220" alt="Architecture diagram: ERP to SAP DM to edge to machines, with legacy MII in coexistence." loading="lazy" decoding="async" />
+        <img class="diagram-dark" src="assets/img/diagrams/migration-coexistence-dark.svg" width="640" height="220" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <figcaption class="diagram-caption">Target path with legacy coexistence during migration</figcaption>
+      </figure>
+    </section>
+
+    <section class="block" aria-labelledby="h-mapped">
+      <h2 id="h-mapped" class="section"><span class="caret" aria-hidden="true"></span>What we deliver</h2>
+      <div class="entry">
+        <h3 class="entry-title-plain">Specialized implementation</h3>
+        <p>SAP DM, PEO, and BTP configuration for production — not slideware.</p>
+      </div>
+      <div class="entry">
+        <h3 class="entry-title-plain">Custom integration</h3>
+        <p>Connectors between S/4HANA, DM, edge, and remaining legacy execution systems.</p>
+      </div>
+      <div class="entry">
+        <h3 class="entry-title-plain">System architecture</h3>
+        <p>Edge-to-ERP blueprints that stay hardware-agnostic and plant-realistic.</p>
+      </div>
+      <div class="entry">
+        <h3 class="entry-title-plain">App modernization</h3>
+        <p>Refactoring MII-era custom logic toward cloud-native or edge runtimes without line stoppage.</p>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="h-faq">
+      <h2 id="h-faq" class="section"><span class="caret" aria-hidden="true"></span>FAQ</h2>
+      <div class="faq-list">
+        <details>
+          <summary>Why migrate from SAP MII or ME now?</summary>
+          <p>ME and MII are retiring, with 15.5 as the final release. SAP provides a Customer Evolution Kit toward Digital Manufacturing. Moving on your schedule is safer than waiting for support cliffs.</p>
+        </details>
+        <details>
+          <summary>Do we always move everything to SAP DM?</summary>
+          <p>No. Mostly standard MES footprints usually go fully to DM. Heavily custom MII applications often rebuild on BTP. Mixed landscapes commonly use both — DM for standard execution, BTP for extensions — decided by fit-gap.</p>
+        </details>
+        <details>
+          <summary>Can we migrate without stopping production?</summary>
+          <p>Yes. Phased coexistence lets legacy and the chosen target (DM, BTP, or both) run together while you prove one line, then scale.</p>
+        </details>
+        <details>
+          <summary>What about shop-floor connectivity?</summary>
+          <p>We design software-defined edge layers (OPC UA, MQTT, and related patterns) so you are not forced into a hardware refresh.</p>
+        </details>
+        <details>
+          <summary>How do we start with Dhiphos?</summary>
+          <p>Discover (fit-gap on standard vs custom) → Prove (bounded PoC on the chosen path) → Scale (embedded or SOW). Email us to begin.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="block block-contact" id="contact" aria-labelledby="h-contact">
+      <h2 id="h-contact" class="section"><span class="caret" aria-hidden="true"></span>Start a migration conversation</h2>
+      <p class="block-lede">
+        Submitting opens your email client with a pre-filled message to
+        <a href="mailto:info@dhiphos.com">info@dhiphos.com</a>.
+      </p>
+      <form class="inquiry" id="inquiry" novalidate>
+        <input type="hidden" name="source" value="sap-dm-migration" />
+        <div class="inquiry-field">
+          <label for="name">Name <span class="req" aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" required />
+        </div>
+        <div class="inquiry-field">
+          <label for="email">Work email <span class="req" aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required />
+        </div>
+        <div class="inquiry-field">
+          <label for="company">Company <span class="req" aria-hidden="true">*</span></label>
+          <input id="company" name="company" type="text" autocomplete="organization" required />
+        </div>
+        <div class="inquiry-field">
+          <label for="interest">Primary interest <span class="req" aria-hidden="true">*</span></label>
+          <select id="interest" name="interest" required>
+            <option value="">Select…</option>
+            <option selected>Migration — path TBD (fit-gap)</option>
+            <option>Migration — fully to SAP DM</option>
+            <option>Migration — fully to SAP BTP</option>
+            <option>Migration — DM and BTP (hybrid)</option>
+            <option>Implementation</option>
+            <option>Integration</option>
+            <option>Architecture</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="inquiry-field">
+          <label for="stack">Current stack</label>
+          <input id="stack" name="stack" type="text" placeholder="e.g. SAP MII 15.x, ME, S/4HANA" />
+        </div>
+        <div class="inquiry-field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="3"></textarea>
+        </div>
+        <div class="inquiry-actions">
+          <button type="submit" class="btn btn-primary">Open email inquiry <span class="btn-arrow" aria-hidden="true">&rarr;</span></button>
+        </div>
+        <p class="inquiry-status" id="inquiry-status" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="foot" role="contentinfo">
+    <div class="foot-wrap">
+      <p class="foot-row foot-contact">
+        <span class="caret" aria-hidden="true"></span>
+        <a href="mailto:info@dhiphos.com">info@dhiphos.com</a>
+        <span class="foot-sep" aria-hidden="true"></span>
+        <a class="social-link" href="https://www.linkedin.com/company/dhiphos" target="_blank" rel="noopener noreferrer" aria-label="Dhiphos on LinkedIn">
+          <svg class="social-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
+            <path fill="currentColor" d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.27 2.36 4.27 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
+          </svg>
+          <span class="visually-hidden">LinkedIn</span>
+        </a>
+      </p>
+      <p class="foot-legal small muted">
+        &copy; <span id="year"></span> &middot; Dhiphos Private Limited &middot; Bengaluru, India
+        <span class="foot-sep" aria-hidden="true"></span>
+        <a href="privacy.html">Privacy</a>
+      </p>
+    </div>
+  </footer>
+  <script src="assets/js/script.js" defer></script>
+</body>
+</html>
