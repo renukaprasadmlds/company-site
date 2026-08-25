@@ -334,7 +334,7 @@ a:hover {
   letter-spacing: -0.02em;
   color: var(--fg);
   margin: 0 0 1.15rem;
-  max-width: 18ch;
+  max-width: 22em;
 }
 
 .lede {
