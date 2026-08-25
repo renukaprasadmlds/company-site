@@ -25,9 +25,8 @@ dhiphos-site/
     ├── js/
     │   └── script.js               # year stamp + signup form handler
     ├── fonts/
-    │   ├── manrope-latin.woff2                 # display + body (variable, latin)
-    │   ├── commit-mono.woff2                   # identifiers — chips, eyebrows, nav (400)
-    │   ├── commit-mono-700.woff2               # mono bold (700)
+    │   ├── geist-sans.woff2                   # display + body (variable, full latin)
+    │   ├── geist-mono.woff2                   # identifiers — chips, eyebrows, entry titles (variable, full latin)
     │   └── space-grotesk-latin.woff2          # brand wordmark only (variable, latin subset)
     └── img/
         ├── logo-light.svg          # light-theme logo (boxed graphic)
@@ -109,13 +108,20 @@ a small filled diamond drawn entirely in CSS — adjust its size via the
 
 ## Typography
 
-Three faces, all **self-hosted** from `assets/fonts/`:
+Three faces, all **self-hosted** from `assets/fonts/` as variable-font WOFF2:
 
-- **Manrope** — display + body. Neutral technical sans (independent, OFL). Variable weight `200–800`, latin.
-- **Commit Mono** — identifiers (chips, eyebrows, topnav links). Anonymous/neutral mono (OFL). Weights `400` and `700`.
-- **Space Grotesk** — brand wordmark only (`.topnav-wordmark` → `DHIPHOS`). Variable weight `400–700`, latin subset.
+- **Geist** — display + body. Frontier-tech neutral sans (Vercel, OFL). Variable weight `100–900`.
+- **Geist Mono** — identifiers (entry titles, chips, eyebrows, topnav links). Pairs natively with Geist. Variable weight `100–900`.
+- **Space Grotesk** — brand wordmark only. Used in exactly one place: `.topnav-wordmark` (rendered as `DHIPHOS`). Gives the brand name a distinct typographic signature. Variable weight `400–700`, latin subset.
 
-`@font-face` lives in `assets/css/styles.css`. No third-party font CDN at runtime. All three are **SIL OFL 1.1**.
+The `@font-face` declarations live at the top of `assets/css/styles.css`. The
+display + mono families ship as single full-Latin variable WOFF2 files; Space
+Grotesk is restricted to the latin `unicode-range` since the wordmark is
+ASCII-only. System-font fallbacks are defined via `--font-display`,
+`--font-mono`, and `--font-brand` CSS tokens.
+
+There are no third-party font CDN requests at runtime. All three fonts are
+licensed under the **SIL Open Font License (OFL) 1.1**.
 
 ## Brand naming
 
@@ -129,7 +135,7 @@ purely typographic, handled by CSS:
 
 A single edit to `Dhiphos` in markup updates the whole site while the wordmark
 surface still displays as `DHIPHOS`. The wordmark is also the only place
-**Space Grotesk** is used — the rest of the site is set in Manrope (see
+**Space Grotesk** is used — the rest of the site is set in Geist (see
 [Typography](#typography)).
 
 ## Deploying
