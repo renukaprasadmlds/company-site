@@ -481,7 +481,7 @@ a:hover {
 
 .block { margin: clamp(2rem, 5vw, 3rem) 0; }
 
-/* Section separators — more air + faded rule + brand diamond */
+/* Section separators — more air + faded rule (no ornaments) */
 .block + .block {
   border-top: 0;
   margin-top: clamp(3.25rem, 9vw, 6rem);
@@ -498,25 +498,14 @@ a:hover {
   height: 1px;
   background: linear-gradient(
     90deg,
-    color-mix(in srgb, var(--accent) 55%, transparent) 0,
-    var(--border) 2.5rem,
-    var(--border) calc(100% - 2.5rem),
+    transparent 0,
+    var(--border) 8%,
+    var(--border) 92%,
     transparent 100%
   );
 }
 
-.block + .block::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: var(--mark-size);
-  height: var(--mark-size);
-  background: var(--accent);
-  transform: translateY(-50%) rotate(45deg);
-}
-
-@supports not (background: linear-gradient(90deg, color-mix(in srgb, red, blue), red)) {
+@supports not (background: linear-gradient(90deg, transparent, red)) {
   .block + .block::before {
     background: var(--rule);
   }
