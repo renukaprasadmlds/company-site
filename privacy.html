@@ -92,6 +92,7 @@
   <link rel="preload" href="assets/fonts/geist-mono.woff2" as="font" type="font/woff2" crossorigin />
 
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
 </head>
 <body id="top">
 
@@ -109,11 +110,15 @@
       </span>
       <span class="topnav-wordmark">Dhiphos</span>
     </a>
-    <nav class="topnav-nav" aria-label="Section navigation">
-      <a href="index.html#offerings">offerings</a>
-      <a href="index.html#services">services</a>
-      <a href="index.html#team">team</a>
-      <a href="index.html#contact">contact</a>
+    <button type="button" class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+    </button>
+    <nav class="topnav-nav" id="primary-nav" aria-label="Primary">
+      <a href="index.html#migration">Migration</a>
+      <a href="index.html#engage">Engage</a>
+      <a href="index.html#services">Services</a>
+      <a href="index.html#work">Experience</a>
+      <a href="index.html#contact">Contact</a>
     </nav>
   </header>
 
@@ -130,12 +135,12 @@
         from visitors and inquiries.
       </p>
       <p class="muted small">
-        Last updated: 29 May 2026
+        Last updated: 25 August 2026
       </p>
     </section>
 
     <section class="block" aria-labelledby="h-summary">
-      <h2 id="h-summary" class="section"><span class="caret" aria-hidden="true"></span>summary</h2>
+      <h2 id="h-summary" class="section"><span class="caret" aria-hidden="true"></span>Summary</h2>
       <p>
         This site uses Google Analytics (GA4) to understand how visitors
         find and move through our pages. Analytics is loaded with all
@@ -144,13 +149,14 @@
         cookies if you accept. We do not run advertising pixels,
         session-replay tools, or other third-party trackers, and we
         do not sell or share your data for marketing. Beyond analytics,
-        the only personal data we receive is the email you choose to
-        send us.
+        the only personal data we receive is what you choose to include
+        when you email us (via the inquiry form&rsquo;s mailto draft or
+        a direct message).
       </p>
     </section>
 
     <section class="block" aria-labelledby="h-who">
-      <h2 id="h-who" class="section"><span class="caret" aria-hidden="true"></span>who we are</h2>
+      <h2 id="h-who" class="section"><span class="caret" aria-hidden="true"></span>Who we are</h2>
       <p>
         This website is operated by <strong>Dhiphos Private Limited</strong>,
         a company registered in Bengaluru, India.
@@ -158,20 +164,22 @@
     </section>
 
     <section class="block" aria-labelledby="h-collect">
-      <h2 id="h-collect" class="section"><span class="caret" aria-hidden="true"></span>what we collect</h2>
+      <h2 id="h-collect" class="section"><span class="caret" aria-hidden="true"></span>What we collect</h2>
 
       <div class="entry">
-        <h3 class="entry-title">contact-form</h3>
+        <h3 class="entry-title-plain">Inquiry form</h3>
         <p>
-          The home-page contact form does not transmit data to our servers.
-          It opens your mail client with a draft addressed to
-          <code>info@dhiphos.com</code>; only sending that draft transmits
-          anything.
+          Contact forms on this site (home, work, and migration pages) do
+          not transmit data to our servers or to a form processor. They
+          open your mail client with a draft addressed to
+          <code>info@dhiphos.com</code>, pre-filled with the fields you
+          entered (name, work email, company, interest, optional stack and
+          message). Only sending that draft transmits anything.
         </p>
       </div>
 
       <div class="entry">
-        <h3 class="entry-title">direct-email</h3>
+        <h3 class="entry-title-plain">Direct email</h3>
         <p>
           When you email us, we receive your email address and whatever you
           choose to include in the message body. We retain inquiry email
@@ -181,7 +189,7 @@
       </div>
 
       <div class="entry">
-        <h3 class="entry-title">server-logs</h3>
+        <h3 class="entry-title-plain">Server logs</h3>
         <p>
           Our static-site host produces standard web-server logs (timestamp,
           IP address, user-agent, requested URL). These are kept briefly for
@@ -191,7 +199,7 @@
       </div>
 
       <div class="entry">
-        <h3 class="entry-title">analytics</h3>
+        <h3 class="entry-title-plain">Analytics</h3>
         <p>
           We use <strong>Google Analytics 4</strong> (property
           <code>G-GHVMTXCPLV</code>) to measure aggregate traffic
@@ -213,7 +221,7 @@
       </div>
 
       <div class="entry">
-        <h3 class="entry-title">consent</h3>
+        <h3 class="entry-title-plain">Consent</h3>
         <p>
           On your first visit, a banner asks whether you'd like to allow
           analytics cookies. You can choose <em>Decline</em> or
@@ -230,7 +238,7 @@
       </div>
 
       <div class="entry">
-        <h3 class="entry-title">cookies</h3>
+        <h3 class="entry-title-plain">Cookies</h3>
         <p>
           We do not set first-party cookies of our own. If you accept
           analytics, Google Analytics sets cookies (typically
@@ -246,7 +254,7 @@
     </section>
 
     <section class="block" aria-labelledby="h-use">
-      <h2 id="h-use" class="section"><span class="caret" aria-hidden="true"></span>what we use it for</h2>
+      <h2 id="h-use" class="section"><span class="caret" aria-hidden="true"></span>What we use it for</h2>
       <p>
         We use what you send us only to respond to your inquiry and to
         deliver the products or services you've asked about. We do not sell,
@@ -255,10 +263,10 @@
     </section>
 
     <section class="block" aria-labelledby="h-third">
-      <h2 id="h-third" class="section"><span class="caret" aria-hidden="true"></span>hosting &amp; third parties</h2>
+      <h2 id="h-third" class="section"><span class="caret" aria-hidden="true"></span>Hosting &amp; third parties</h2>
 
       <div class="entry">
-        <h3 class="entry-title">hosting</h3>
+        <h3 class="entry-title-plain">Hosting</h3>
         <p>
           The site is hosted on <strong>GitHub Pages</strong> (operated by
           GitHub, Inc.) and served from a global CDN, which may briefly
@@ -269,7 +277,7 @@
       </div>
 
       <div class="entry">
-        <h3 class="entry-title">analytics-provider</h3>
+        <h3 class="entry-title-plain">Analytics provider</h3>
         <p>
           Google Analytics is provided by <strong>Google LLC</strong>
           (and, for visitors in the EEA / UK / Switzerland, Google
@@ -281,7 +289,7 @@
       </div>
 
       <div class="entry">
-        <h3 class="entry-title">email-provider</h3>
+        <h3 class="entry-title-plain">Email provider</h3>
         <p>
           Email sent to <code>info@dhiphos.com</code> is processed by
           <strong>Zoho Mail</strong>, our mailbox provider, who acts as a
@@ -291,7 +299,7 @@
     </section>
 
     <section class="block" aria-labelledby="h-rights">
-      <h2 id="h-rights" class="section"><span class="caret" aria-hidden="true"></span>your rights</h2>
+      <h2 id="h-rights" class="section"><span class="caret" aria-hidden="true"></span>Your rights</h2>
       <p>
         Under the Digital Personal Data Protection Act, 2023 (India) and
         comparable laws (including the EU GDPR), you have the right to
@@ -304,7 +312,7 @@
     </section>
 
     <section class="block" aria-labelledby="h-children">
-      <h2 id="h-children" class="section"><span class="caret" aria-hidden="true"></span>children</h2>
+      <h2 id="h-children" class="section"><span class="caret" aria-hidden="true"></span>Children</h2>
       <p>
         This website and our services are not directed at people under 18.
         We do not knowingly collect personal data from children.
@@ -312,7 +320,7 @@
     </section>
 
     <section class="block" aria-labelledby="h-changes">
-      <h2 id="h-changes" class="section"><span class="caret" aria-hidden="true"></span>changes</h2>
+      <h2 id="h-changes" class="section"><span class="caret" aria-hidden="true"></span>Changes</h2>
       <p>
         If we update this notice, we will post the new version on this page
         and refresh the &ldquo;Last updated&rdquo; date at the top.
@@ -320,7 +328,7 @@
     </section>
 
     <section class="block" aria-labelledby="h-contact">
-      <h2 id="h-contact" class="section"><span class="caret" aria-hidden="true"></span>contact</h2>
+      <h2 id="h-contact" class="section"><span class="caret" aria-hidden="true"></span>Contact</h2>
       <p>
         For any privacy-related question or request:
       </p>

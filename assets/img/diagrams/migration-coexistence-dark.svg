@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 220" role="img" aria-labelledby="diag-mig-title-d diag-mig-desc-d">
+  <title id="diag-mig-title-d">Phased coexistence architecture</title>
+  <desc id="diag-mig-desc-d">ERP connects to SAP Digital Manufacturing on BTP, which connects to the edge layer and shop-floor machines, with a parallel path for legacy MII during migration.</desc>
+  <rect fill="#242424" stroke="#666666" stroke-width="1.5" x="16" y="70" width="110" height="64" rx="6"/>
+  <text font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600" fill="#ffffff" x="71" y="98" text-anchor="middle">ERP</text>
+  <text font-family="ui-monospace, monospace" font-size="10" fill="#888888" x="71" y="116" text-anchor="middle">S/4HANA</text>
+  <path stroke="#F59E0B" stroke-width="1.75" fill="none" d="M126 102 H168"/>
+  <polygon fill="#F59E0B" points="168,98 178,102 168,106"/>
+  <rect fill="#2a2118" stroke="#F59E0B" stroke-width="1.75" x="178" y="54" width="150" height="96" rx="6"/>
+  <text font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600" fill="#ffffff" x="253" y="90" text-anchor="middle">SAP DM</text>
+  <text font-family="ui-monospace, monospace" font-size="10" fill="#888888" x="253" y="108" text-anchor="middle">Cloud MES  /  BTP</text>
+  <text font-family="ui-monospace, monospace" font-size="10" fill="#888888" x="253" y="124" text-anchor="middle">target state</text>
+  <path stroke="#F59E0B" stroke-width="1.75" fill="none" d="M328 102 H370"/>
+  <polygon fill="#F59E0B" points="370,98 380,102 370,106"/>
+  <rect fill="#242424" stroke="#666666" stroke-width="1.5" x="380" y="70" width="110" height="64" rx="6"/>
+  <text font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600" fill="#ffffff" x="435" y="98" text-anchor="middle">Edge</text>
+  <text font-family="ui-monospace, monospace" font-size="10" fill="#888888" x="435" y="116" text-anchor="middle">IIoT  /  OPC UA</text>
+  <path stroke="#F59E0B" stroke-width="1.75" fill="none" d="M490 102 H532"/>
+  <polygon fill="#F59E0B" points="532,98 542,102 532,106"/>
+  <rect fill="#242424" stroke="#666666" stroke-width="1.5" x="542" y="70" width="82" height="64" rx="6"/>
+  <text font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600" fill="#ffffff" x="583" y="98" text-anchor="middle">Line</text>
+  <text font-family="ui-monospace, monospace" font-size="10" fill="#888888" x="583" y="116" text-anchor="middle">Machines</text>
+  <rect fill="#242424" stroke="#666666" stroke-width="1.5" x="178" y="168" width="150" height="40" rx="6"/>
+  <text font-family="ui-sans-serif, system-ui, sans-serif" font-size="13" font-weight="600" fill="#ffffff" x="253" y="193" text-anchor="middle">Legacy MII / ME</text>
+  <path stroke="#888888" stroke-width="1.25" stroke-dasharray="4 3" fill="none" d="M253 150 V168"/>
+  <text font-family="ui-monospace, monospace" font-size="10" fill="#888888" x="320" y="162" text-anchor="start">coexistence</text>
+</svg>

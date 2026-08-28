@@ -1,20 +1,10 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) — Consent Mode v2.
-       Default-denied for analytics + ad signals; the banner shipped
-       by assets/js/consent.js asks the visitor and flips
-       `analytics_storage` to `granted` if they accept. We never
-       enable ad signals — Dhiphos doesn't run ads — but they're
-       listed explicitly so the consent state is fully documented.
-       `wait_for_update: 500` gives consent.js up to 500ms to apply
-       a stored decision before the first hit fires, so returning
-       visitors don't see a flash of cookieless tracking. -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHVMTXCPLV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
-
     gtag('consent', 'default', {
       ad_storage: 'denied',
       ad_user_data: 'denied',
@@ -24,54 +14,34 @@
       security_storage: 'granted',
       wait_for_update: 500
     });
-
     gtag('js', new Date());
     gtag('config', 'G-GHVMTXCPLV');
   </script>
   <script src="assets/js/consent.js" defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dhiphos — Industrial software for modern manufacturing</title>
-  <meta name="description" content="Dhiphos builds industrial software for modern manufacturing — MES/MOM, IIoT edge, digital twins, physical AI. Strictly software, hardware-agnostic." />
-  <!-- Mobile browser chrome tint. Paired so Android Chrome / iOS Safari
-       URL bar matches the page background in either system theme. -->
-  <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
-  <meta name="theme-color" content="#1a1a1a" media="(prefers-color-scheme: dark)" />
+  <title>Dhiphos | SAP ME and MII modernization for manufacturing</title>
+  <meta name="description" content="Dhiphos helps manufacturers migrate SAP ME and MII before support ends to SAP Digital Manufacturing, SAP BTP, or both, without stopping production." />
+  <meta name="theme-color" content="#fafaf9" media="(prefers-color-scheme: light)" />
+  <meta name="theme-color" content="#141414" media="(prefers-color-scheme: dark)" />
 
-  <!-- Favicons. SVG is the primary icon — it scales crisply for any
-       size, including Google's 48×48 minimum for search results.
-       PNG fallbacks cover legacy browsers, Googlebot when SVG isn't
-       picked up, and the iOS home-screen shortcut. The manifest
-       link activates assets referenced in manifest.webmanifest for
-       installable / PWA contexts. -->
   <link rel="icon" type="image/svg+xml" href="/assets/img/favicon.svg" />
   <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/favicon-48.png" />
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/img/apple-touch-icon.png" />
   <link rel="manifest" href="/manifest.webmanifest" />
-
   <link rel="canonical" href="https://dhiphos.com/" />
 
-  <meta property="og:title" content="Dhiphos — Industrial software for modern manufacturing" />
-  <meta property="og:description" content="Dhiphos builds industrial software for modern manufacturing — MES/MOM, IIoT edge, digital twins, physical AI. Strictly software, hardware-agnostic." />
+  <meta property="og:title" content="Dhiphos | SAP ME and MII modernization for manufacturing" />
+  <meta property="og:description" content="Migrate SAP ME and MII to SAP Digital Manufacturing, SAP BTP, or both, without stopping the line." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://dhiphos.com/" />
   <meta property="og:site_name" content="Dhiphos" />
-  <!-- Brand card shared on Facebook, LinkedIn, Slack, WhatsApp, iMessage,
-       etc. 1200×630 PNG (the OG canonical 1.91:1) so platforms render the
-       large card without cropping. Absolute URL is required by most
-       scrapers. -->
   <meta property="og:image" content="https://dhiphos.com/assets/img/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
-  <meta property="og:image:alt" content="Dhiphos — Industrial software for modern manufacturing" />
-  <!-- Twitter / X card. Upgraded to `summary_large_image` now that an
-       `og:image` is in place; X reuses the og:image tag, so no separate
-       twitter:image is needed. -->
+  <meta property="og:image:alt" content="Dhiphos | Industrial software for modern manufacturing" />
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Schema.org Organization data. Helps Google build the brand
-       Knowledge Panel / sidebar / AI Overview entry. JSON-LD is the
-       format Google explicitly recommends. -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -86,20 +56,46 @@
       "addressCountry": "IN"
     },
     "sameAs": ["https://www.linkedin.com/company/dhiphos"],
-    "description": "Industrial software for modern manufacturing — MES/MOM, IIoT edge, digital twins, physical AI. Strictly software, hardware-agnostic."
+    "description": "Industrial software practice specializing in SAP ME and MII modernization to SAP Digital Manufacturing and SAP BTP."
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is happening to SAP ME and SAP MII?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SAP Manufacturing Execution and SAP Manufacturing Integration and Intelligence are reaching end of life. Version 15.5 is the final release. Mainstream maintenance ends in 2027, and extended support runs through December 31, 2030. SAP positions Digital Manufacturing as the cloud successor."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do we always move everything to SAP Digital Manufacturing?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. Standard MES footprints generally move fully to SAP Digital Manufacturing. Heavy custom MII applications often rebuild on SAP BTP. Mixed plants use both, with the exact split determined by a fit-gap analysis."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can we migrate without stopping production?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Phased coexistence keeps legacy ME and MII running alongside your new target environment while you validate a pilot line, then scale plant by plant."
+        }
+      }
+    ]
   }
   </script>
 
-  <!-- Preload the body fonts (Geist + Geist Mono) so the browser starts
-       fetching them in parallel with the stylesheet, rather than waiting
-       for CSS to load and discover the @font-face URLs. Space Grotesk is
-       not preloaded — it's used only on the topnav wordmark, which has
-       a system-font fallback that looks fine for the brief moment before
-       the brand face loads. -->
   <link rel="preload" href="assets/fonts/geist-sans.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="assets/fonts/geist-mono.woff2" as="font" type="font/woff2" crossorigin />
-
   <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="stylesheet" href="assets/css/components.css" />
 </head>
 <body id="top">
 
@@ -108,20 +104,20 @@
   <header class="topnav" aria-label="Primary">
     <a class="topnav-brand" href="#top" aria-label="Dhiphos home">
       <span class="topnav-logo-slot" aria-hidden="true">
-        <img class="topnav-logo topnav-logo-light"
-             src="assets/img/logo-light.svg"
-             alt="" width="33" height="33" />
-        <img class="topnav-logo topnav-logo-dark"
-             src="assets/img/logo-dark.svg"
-             alt="" width="24" height="24" />
+        <img class="topnav-logo topnav-logo-light" src="assets/img/logo-light.svg" alt="" width="33" height="33" />
+        <img class="topnav-logo topnav-logo-dark" src="assets/img/logo-dark.svg" alt="" width="24" height="24" />
       </span>
       <span class="topnav-wordmark">Dhiphos</span>
     </a>
-    <nav class="topnav-nav" aria-label="Section navigation">
-      <a href="#offerings">offerings</a>
-      <a href="#services">services</a>
-      <a href="#team">team</a>
-      <a href="#contact">contact</a>
+    <button type="button" class="nav-toggle" aria-controls="primary-nav" aria-expanded="false" aria-label="Open menu">
+      <span class="nav-toggle-bars" aria-hidden="true"></span>
+    </button>
+    <nav class="topnav-nav" id="primary-nav" aria-label="Section navigation">
+      <a href="#migration">Migration</a>
+      <a href="#engage">Engage</a>
+      <a href="#services">Services</a>
+      <a href="#work">Experience</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
@@ -129,259 +125,363 @@
 
     <section class="hero" aria-labelledby="hero-h1">
       <h1 id="hero-h1" class="tagline">
-        Industrial software, modernized.
+        Modernize SAP ME and MII before support ends. Keep the line running.
       </h1>
-
       <p class="lede">
-        We modernize the software stack that runs a shop floor &mdash;
-        MES/MOM, edge, digital twin, AI &mdash; without touching the
-        physical line.
+        Dhiphos builds software for the shop floor. We help plants move off SAP ME and MII 
+        to SAP Digital Manufacturing, SAP BTP, or a hybrid of both, depending on how custom your applications are.
       </p>
-
       <p class="hero-actions">
-        <a class="btn btn-primary" href="#contact">Get in touch <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
-        <a class="btn-link" href="#offerings">Explore offerings</a>
+        <a class="btn btn-primary" href="#contact">Start a conversation <span class="btn-arrow" aria-hidden="true">&rarr;</span></a>
+        <a class="btn-link" href="#migration">Migration paths</a>
       </p>
     </section>
 
-    <section class="block" id="offerings" aria-labelledby="h-offerings">
-      <h2 id="h-offerings" class="section"><span class="caret" aria-hidden="true"></span>offerings</h2>
+    <ul class="trust-strip" aria-label="At a glance">
+      <li><strong>Focus</strong> SAP ME · MII · DM · PEO · BTP</li>
+      <li><strong>Industries</strong> Discrete · Aerospace · Automotive · Semiconductor</li>
+      <li><strong>Response</strong> Within one business day</li>
+    </ul>
 
+    <!-- ========== MIGRATION ========== -->
+    <section class="block" id="migration" aria-labelledby="h-migration">
+      <h2 id="h-migration" class="section"><span class="caret" aria-hidden="true"></span>Migration</h2>
       <p class="block-lede">
-        The execution and data layers that digitize a production line.
+        SAP version 15.5 is the final release for ME and MII. Mainstream maintenance ends in 2027, 
+        with extended support running through December 31, 2030. SAP Digital Manufacturing is the cloud successor. 
+        This is not a direct copy-paste upgrade; it is a systems redesign you can control if you start now.
       </p>
 
-      <p class="chip-rail-eyebrow">layers</p>
-      <ul class="chip-rail" aria-label="Offerings layers">
-        <li class="chip">mes-mom</li>
-        <li class="chip">iiot-edge</li>
-        <li class="chip">digital-twin</li>
-        <li class="chip">physical-ai</li>
+      <div class="problem-callout">
+        <p>
+          Your target architecture depends on your footprint. Standard MES operations map directly to 
+          <strong>SAP Digital Manufacturing</strong>. Heavy custom logic in MII usually rebuilds cleanly on 
+          <strong>SAP BTP</strong>. Most plants use a mix of both.
+        </p>
+      </div>
+
+      <h3 class="entry-title-plain is-spaced">Three paths</h3>
+      <p class="block-lede block-lede-tight">
+        A fit-gap analysis determines your ideal split between standard configuration and custom code before you commit.
+      </p>
+      <ul class="path-grid">
+        <li class="path-card">
+          <p class="path-fit">Mostly standard</p>
+          <h3>Fully to SAP DM</h3>
+          <p>
+            When ME and MII handle core MES operations like orders, WIP, routing, quality, and operator guidance, 
+            map directly to SAP Digital Manufacturing as your cloud successor.
+          </p>
+          <p>
+            Best when your plant can adopt standard DM capabilities through configuration rather than rewriting custom code.
+          </p>
+        </li>
+        <li class="path-card">
+          <p class="path-fit">Heavily custom</p>
+          <h3>Fully to SAP BTP</h3>
+          <p>
+            When MII functions as a custom application platform with bespoke user interfaces and business logic 
+            that does not map to standard DM features, rebuild on SAP BTP using CAP, Integration Suite, and UI5.
+          </p>
+          <p>
+            Best when your operational value sits in custom applications rather than standard MES workflows.
+          </p>
+        </li>
+        <li class="path-card">
+          <p class="path-fit">Mixed landscape</p>
+          <h3>DM and BTP together</h3>
+          <p>
+            The most common approach: standard execution on DM, extensions and heavy custom logic on BTP, 
+            with phased coexistence until each facility is ready.
+          </p>
+          <p>
+            Fit-gap splits what becomes DM configuration, what moves to BTP services, and what stays temporarily on legacy systems.
+          </p>
+        </li>
       </ul>
 
-      <!--<figure class="illus illus-offerings">
-        <img class="illus-img illus-light"
-             src="assets/img/offerings-light.webp"
-             alt="Diagram of Dhiphos offerings: MES/MOM, IIoT edge, digital twin, and physical AI layers connecting the shop floor to enterprise systems."
-             width="3910" height="1088"
-             loading="lazy" decoding="async" />
-        <img class="illus-img illus-dark"
-             src="assets/img/offerings-dark.webp"
-             alt=""
-             aria-hidden="true"
-             width="1952" height="544"
-             loading="lazy" decoding="async" />
-      </figure>-->
+      <h3 class="entry-title-plain is-spaced">Phased coexistence</h3>
+      <p class="block-lede">
+        Skip the risky big-bang cutover. Keep legacy ME and MII running side-by-side with your new target environment 
+        until a single pilot line proves the model works.
+      </p>
+      <figure class="diagram">
+        <img class="diagram-light" src="assets/img/diagrams/migration-coexistence.svg" width="640" height="220" alt="Architecture: ERP to SAP DM to edge to machines, with legacy MII in coexistence." loading="lazy" decoding="async" />
+        <img class="diagram-dark" src="assets/img/diagrams/migration-coexistence-dark.svg" width="640" height="220" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <figcaption class="diagram-caption">Target architecture with legacy coexistence</figcaption>
+      </figure>
 
-      <div class="entry">
-        <h3 class="entry-title">mes-mom</h3>
-        <p>
-          Manufacturing Execution Systems and Manufacturing Operations
-          Management. Software bridges between shop-floor operations and
-          enterprise planning.
-        </p>
-      </div>
+      <h3 class="entry-title-plain">Timeline</h3>
+      <ul class="timeline">
+        <li>
+          <strong>Final release: 15.5</strong>
+          <p>No further feature releases are planned for ME and MII. Future innovation is focused on SAP Digital Manufacturing on BTP.</p>
+        </li>
+        <li>
+          <strong>Mainstream maintenance ends 2027</strong>
+          <p>Plan your transformation while engineering capacity and project calendars remain under your control.</p>
+        </li>
+        <li>
+          <strong>Extended support through Dec 31, 2030</strong>
+          <p>Limited, premium-cost maintenance only. Waiting until late in the window increases costs and cutover risk.</p>
+        </li>
+      </ul>
 
-      <div class="entry">
-        <h3 class="entry-title">iiot-edge</h3>
-        <p>
-          Industrial IoT and edge data layers. Processing production
-          telemetry at the source &mdash; strictly software-defined and
-          hardware-agnostic.
-        </p>
-      </div>
-
-      <div class="entry">
-        <h3 class="entry-title">digital-twin</h3>
-        <p>
-          Virtual representations of physical assets, processes, and
-          workflows. Software environments to simulate and predict
-          shop-floor behaviour before changes hit the line.
-        </p>
-      </div>
-
-      <div class="entry">
-        <h3 class="entry-title">physical-ai</h3>
-        <p>
-          Applying machine learning to physical manufacturing. On our
-          near-term roadmap: inference at the edge, predictive modeling
-          on the shop floor, and operator-assist AI in the loop.
-        </p>
+      <div class="faq-list is-spaced">
+        <details class="faq-item">
+          <summary>Do we always move everything to SAP DM?</summary>
+          <div class="faq-body"><div class="faq-body-inner">
+            <p>No. Standard MES footprints go to DM. Heavy custom MII rebuilds on BTP. Most plants use a hybrid approach determined by fit-gap.</p>
+          </div></div>
+        </details>
+        <details class="faq-item">
+          <summary>Can we migrate without stopping production?</summary>
+          <div class="faq-body"><div class="faq-body-inner">
+            <p>Yes. Phased coexistence keeps your existing systems live while you validate a single line before rolling it out plant by plant.</p>
+          </div></div>
+        </details>
+        <details class="faq-item">
+          <summary>What about shop-floor connectivity?</summary>
+          <div class="faq-body"><div class="faq-body-inner">
+            <p>We deploy software-defined edge layers like OPC UA and MQTT so you are not forced into an expensive hardware refresh.</p>
+          </div></div>
+        </details>
+        <details class="faq-item">
+          <summary>How do we start?</summary>
+          <div class="faq-body"><div class="faq-body-inner">
+            <p>Discover (fit-gap analysis) to Prove (bounded pilot) to Scale (embedded delivery or fixed-scope SOW).</p>
+          </div></div>
+        </details>
       </div>
     </section>
 
-    <section class="block" id="services" aria-labelledby="h-services">
-      <h2 id="h-services" class="section"><span class="caret" aria-hidden="true"></span>services</h2>
-
+    <!-- ========== ENGAGE ========== -->
+    <section class="block" id="engage" aria-labelledby="h-engage">
+      <h2 id="h-engage" class="section"><span class="caret" aria-hidden="true"></span>How we engage</h2>
       <p class="block-lede">
-        Hands-on architecture and implementation, builder-to-builder. We
-        embed with engineering teams already mid-modernization.
-        Remote-friendly with global clients.
+        A straightforward path from first call to production, built for manufacturers who need senior engineers 
+        on the work rather than a rotating vendor bench.
+      </p>
+      <ol class="engage-grid">
+        <li class="engage-card">
+          <p class="engage-step">01</p>
+          <h3>Discover</h3>
+          <p>Fit-gap analysis on your ME and MII stack to map out what is standard, what is custom, and the right target path.</p>
+          <p class="engage-meta">Typical: 1 to 2 days</p>
+        </li>
+        <li class="engage-card">
+          <p class="engage-step">02</p>
+          <h3>Prove</h3>
+          <p>A bounded pilot on a single line or cell to validate connectivity, data models, and operator workflows before scaling.</p>
+          <p class="engage-meta">Typical: weeks, fixed scope</p>
+        </li>
+        <li class="engage-card">
+          <p class="engage-step">03</p>
+          <h3>Scale</h3>
+          <p>Embedded implementation across plants, maintaining live coexistence until cutover is completely safe.</p>
+          <p class="engage-meta">Typical: months, production-aware</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ========== SERVICES ========== -->
+    <section class="block" id="services" aria-labelledby="h-services">
+      <h2 id="h-services" class="section"><span class="caret" aria-hidden="true"></span>Services</h2>
+      <p class="block-lede">
+        Architecture and implementation for teams already mid-modernization. We write code and work directly on the floor.
       </p>
 
-      <p class="chip-rail-eyebrow">platform expertise</p>
+      <p class="chip-rail-eyebrow">Platform expertise</p>
       <ul class="chip-rail" aria-label="Platform expertise">
-        <li class="chip">SAP PEO</li>
         <li class="chip">SAP DM</li>
         <li class="chip">SAP MII</li>
         <li class="chip">SAP ME</li>
+        <li class="chip">SAP PEO</li>
         <li class="chip">SAP BTP</li>
       </ul>
 
-      <p class="chip-rail-eyebrow">practice areas</p>
-      <ul class="chip-rail" aria-label="Services practice areas">
-        <li class="chip">specialized-implementation</li>
-        <li class="chip">custom-integration</li>
-        <li class="chip">system-architecture</li>
-        <li class="chip">app-modernization</li>
-      </ul>
-
-      <!--<figure class="illus illus-services">
-        <img class="illus-img illus-light"
-             src="assets/img/services-light.webp"
-             alt="Diagram of Dhiphos services: specialized implementation, custom integration, system architecture, and app modernization across the manufacturing software stack."
-             width="3922" height="1088"
-             loading="lazy" decoding="async" />
-        <img class="illus-img illus-dark"
-             src="assets/img/services-dark.webp"
-             alt=""
-             aria-hidden="true"
-             width="3936" height="1088"
-             loading="lazy" decoding="async" />
-      </figure>-->
-
       <div class="entry">
-        <h3 class="entry-title">specialized-implementation</h3>
+        <h3 class="entry-title-plain">Specialized implementation</h3>
         <p>
-          Configuration and deployment of the SAP Manufacturing Suite
-          &mdash; PEO, DM, MII, ME, BTP &mdash; for production environments.
-          We work in code and on the floor.
+          Configure and deploy SAP Digital Manufacturing, PEO, and BTP for production environments, 
+          keeping production line continuity non-negotiable during transitions.
         </p>
       </div>
-
       <div class="entry">
-        <h3 class="entry-title">custom-integration</h3>
+        <h3 class="entry-title-plain">Custom integration</h3>
         <p>
-          Connecting legacy industrial systems to modern data environments.
-          Custom middleware, software connectors, and APIs that fit the
-          stack you already have.
+          Custom middleware, connectors, and APIs bridging S/4HANA, DM, edge devices, and legacy execution systems 
+          to fit the exact stack you run.
         </p>
       </div>
-
       <div class="entry">
-        <h3 class="entry-title">system-architecture</h3>
+        <h3 class="entry-title-plain">System architecture</h3>
         <p>
-          End-to-end software architecture from edge telemetry to ERP.
-          Hardware-agnostic by design.
+          End-to-end software architecture from edge telemetry to ERP. Hardware-agnostic by design, 
+          with clear responsibility boundaries between DM and BTP.
         </p>
       </div>
-
       <div class="entry">
-        <h3 class="entry-title">app-modernization</h3>
+        <h3 class="entry-title-plain">App modernization</h3>
         <p>
-          Migrating and refactoring legacy industrial applications to
-          cloud-native or edge runtimes. Without halting production.
+          Refactor MII-era custom applications toward cloud-native or edge runtimes on BTP without a risky big-bang cutover.
         </p>
       </div>
     </section>
 
+    <!-- ========== LAYERS ========== -->
+    <section class="block" id="layers" aria-labelledby="h-layers">
+      <h2 id="h-layers" class="section"><span class="caret" aria-hidden="true"></span>Software layers</h2>
+      <p class="block-lede">
+        The execution and data layers that bridge enterprise planning down to the shop floor. Strictly software, hardware-agnostic.
+      </p>
+
+      <figure class="diagram">
+        <img class="diagram-light" src="assets/img/diagrams/software-layers.svg" alt="Layers: enterprise planning, MES/MOM, edge IIoT, and shop floor." width="640" height="160" loading="lazy" decoding="async" />
+        <img class="diagram-dark" src="assets/img/diagrams/software-layers-dark.svg" alt="" aria-hidden="true" width="640" height="160" loading="lazy" decoding="async" />
+        <figcaption class="diagram-caption">From ERP planning to the line</figcaption>
+      </figure>
+
+      <div class="entry">
+        <h3 class="entry-title-plain">MES / MOM</h3>
+        <p>
+          Manufacturing execution and operations management. The software bridge connecting shop-floor operations 
+          to enterprise planning, including SAP Digital Manufacturing.
+        </p>
+      </div>
+      <div class="entry">
+        <h3 class="entry-title-plain">IIoT and edge</h3>
+        <p>
+          Industrial IoT and edge data layers. Processing production telemetry right at the source with 
+          software-defined, hardware-agnostic components.
+        </p>
+      </div>
+      <div class="entry">
+        <h3 class="entry-title-plain">Digital twin</h3>
+        <p>
+          Virtual representations of physical assets and workflows. Software environments to simulate 
+          and predict shop-floor behavior before changes hit production.
+        </p>
+      </div>
+
+      <p class="roadmap-note">
+        <strong>Roadmap:</strong> Physical AI, edge inference, predictive modeling, and operator-assist tools 
+        are currently in active development, not packaged product lines yet.
+      </p>
+    </section>
+
+    <!-- ========== EXPERIENCE ========== -->
+    <section class="block" id="work" aria-labelledby="h-work">
+      <h2 id="h-work" class="section"><span class="caret" aria-hidden="true"></span>Experience</h2>
+      <p class="block-lede">
+        Hands-on delivery across discrete manufacturing, aerospace, automotive, and semiconductor plants, 
+        connecting enterprise software directly to shop-floor hardware.
+      </p>
+      <div class="entry">
+        <h3 class="entry-title-plain">Connected production networks</h3>
+        <p>
+          Integrated dozens of machines in an aerospace facility into a single digital network and built live 
+          production dashboards that measurably reduced equipment downtime.
+        </p>
+      </div>
+      <div class="entry">
+        <h3 class="entry-title-plain">SAP-to-shop-floor automation</h3>
+        <p>
+          Linked SAP directly into factory software so production orders run seamlessly from enterprise planning 
+          through execution on the line.
+        </p>
+      </div>
+      <div class="entry">
+        <h3 class="entry-title-plain">Production-aware modernization</h3>
+        <p>
+          Engineered phased coexistence strategies for regulated plants, modernizing core execution layers 
+          without a risky big-bang cutover or compromising compliance.
+        </p>
+      </div>
+    </section>
+
+    <!-- ========== TEAM ========== -->
     <section class="block" id="team" aria-labelledby="h-team">
-      <h2 id="h-team" class="section"><span class="caret" aria-hidden="true"></span>team</h2>
-
+      <h2 id="h-team" class="section"><span class="caret" aria-hidden="true"></span>Team</h2>
       <p class="block-lede">
-        A founder-led engineering practice. Hands-on across the SAP
-        Manufacturing Suite, production systems, edge data, and digital-twin
-        architectures.
+        An engineering practice focused on the SAP Manufacturing Suite, production systems, and edge architectures. 
+        Builder-to-builder, remote-friendly, working with global clients.
       </p>
-
-      <p class="chip-rail-eyebrow">expertise</p>
-      <ul class="chip-rail" aria-label="Team expertise">
-        <li class="chip">industry-4.0</li>
-        <li class="chip">iiot</li>
-        <li class="chip">connected-factory</li>
-        <li class="chip">sap-mfg</li>
-      </ul>
-
-      <!--<figure class="illus illus-team">
-        <img class="illus-img illus-light"
-             src="assets/img/team-light.webp"
-             alt="Diagram illustrating the Dhiphos team's expertise across the SAP Manufacturing Suite, industrial protocols, and shop-floor connectivity."
-             width="3936" height="1088"
-             loading="lazy" decoding="async" />
-        <img class="illus-img illus-dark"
-             src="assets/img/team-dark.webp"
-             alt=""
-             aria-hidden="true"
-             width="3936" height="1088"
-             loading="lazy" decoding="async" />
-      </figure>-->
-
       <div class="entry">
-        <h3 class="entry-title">founder</h3>
+        <h3 class="entry-title-plain">Background</h3>
         <p>
-          Nearly two decades building software that connects SAP and other
-          business systems directly to machines on the factory floor.
-          Aerospace, automotive, and pharmaceutical lines &mdash; turning
-          Industry 4.0 from spec to working systems.
+          Nearly two decades building software that connects SAP and other business systems directly to factory machinery 
+          across discrete, aerospace, automotive, and semiconductor lines.
         </p>
       </div>
-
       <div class="entry">
-        <h3 class="entry-title">selected work</h3>
+        <h3 class="entry-title-plain">Approach</h3>
         <p>
-          Connected dozens of machines in an aerospace factory to a single
-          digital network. Built live production dashboards that reduced
-          equipment downtime. Linked SAP to factory software, automating
-          production orders end-to-end.
-        </p>
-      </div>
-
-      <div class="entry">
-        <h3 class="entry-title">philosophy</h3>
-        <p>
-          Pure software, hardware-agnostic, builder-to-builder. We write
-          code that runs on shop floors &mdash; for the people who keep
-          them running.
+          Pure software, hardware-agnostic. We write code that runs on shop floors, built for the people who keep them running.
         </p>
       </div>
     </section>
 
+    <!-- ========== CONTACT ========== -->
     <section class="block block-contact" id="contact" aria-labelledby="h-contact">
-      <h2 id="h-contact" class="section"><span class="caret" aria-hidden="true"></span>contact</h2>
-
+      <h2 id="h-contact" class="section"><span class="caret" aria-hidden="true"></span>Contact</h2>
       <p class="block-lede">
-        Tell us about your manufacturing stack and what you're trying to
-        solve. We typically respond within one business day.
+        Tell us about your ME and MII landscape and what you are trying to solve. 
+        Submitting opens your email client with a pre-filled message to 
+        <a href="mailto:info@dhiphos.com">info@dhiphos.com</a>. We typically respond within one business day.
       </p>
 
-      <form class="signup" id="signup" novalidate>
-        <label for="email" class="signup-label">Email</label>
-        <div class="signup-row">
-          <input
-            id="email"
-            name="email"
-            type="email"
-            inputmode="email"
-            autocomplete="email"
-            placeholder="you@company.com"
-            required
-          />
-          <button type="submit" class="btn btn-primary">Send inquiry <span class="btn-arrow" aria-hidden="true">&rarr;</span></button>
+      <form class="inquiry" id="inquiry" novalidate>
+        <input type="hidden" name="source" value="home" />
+
+        <div class="inquiry-field">
+          <label for="name">Name <span class="req" aria-hidden="true">*</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" required />
         </div>
-        <p class="signup-status" id="signup-status" role="status" aria-live="polite"></p>
+        <div class="inquiry-field">
+          <label for="email">Work email <span class="req" aria-hidden="true">*</span></label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="you@company.com" required />
+        </div>
+        <div class="inquiry-field">
+          <label for="company">Company <span class="req" aria-hidden="true">*</span></label>
+          <input id="company" name="company" type="text" autocomplete="organization" required />
+        </div>
+        <div class="inquiry-field">
+          <label for="interest">Primary interest <span class="req" aria-hidden="true">*</span></label>
+          <select id="interest" name="interest" required>
+            <option value="">Select…</option>
+            <option>Migration — help choose DM, BTP, or both</option>
+            <option>Migration — fully to SAP DM</option>
+            <option>Migration — fully to SAP BTP</option>
+            <option>Migration — DM and BTP (hybrid)</option>
+            <option>Implementation</option>
+            <option>Integration</option>
+            <option>Architecture</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="inquiry-field">
+          <label for="stack">Current stack</label>
+          <input id="stack" name="stack" type="text" placeholder="e.g. SAP MII 15.x, ME, S/4HANA" />
+        </div>
+        <div class="inquiry-field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" rows="3" placeholder="Brief context on timeline and goals"></textarea>
+        </div>
+
+        <div class="inquiry-actions">
+          <button type="submit" class="btn btn-primary">Open email inquiry <span class="btn-arrow" aria-hidden="true">&rarr;</span></button>
+          <p class="inquiry-hint">Uses your mail app. Nothing is stored on this site.</p>
+        </div>
+        <p class="inquiry-status" id="inquiry-status" role="status" aria-live="polite"></p>
 
         <noscript>
           <p class="signup-noscript">
-            JavaScript is disabled. Please email us directly at
+            JavaScript is disabled. Please email us directly at 
             <a href="mailto:info@dhiphos.com">info@dhiphos.com</a>.
           </p>
         </noscript>
       </form>
-
-      <p class="contact-direct">
-        Or reach us directly at
-        <a href="mailto:info@dhiphos.com">info@dhiphos.com</a>.
-      </p>
     </section>
 
   </main>
@@ -396,8 +496,7 @@
            href="https://www.linkedin.com/company/dhiphos"
            target="_blank" rel="noopener noreferrer"
            aria-label="Dhiphos on LinkedIn">
-          <svg class="social-icon" viewBox="0 0 24 24"
-               width="18" height="18" aria-hidden="true" focusable="false">
+          <svg class="social-icon" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">
             <path fill="currentColor"
                   d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.95v5.66H9.36V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.27 2.36 4.27 5.43v6.31zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/>
           </svg>

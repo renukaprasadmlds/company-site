@@ -1,21 +1,43 @@
-// Dhiphos — small bits of progressive enhancement.
-// No frameworks. No tracking. Plain DOM.
-
+// Dhiphos — progressive enhancement: year, section nav, mobile nav,
+// custom select (theme-aligned), mailto inquiry.
 (function () {
   "use strict";
 
-  // Footer year stamp.
   var yearEl = document.getElementById("year");
   if (yearEl) {
     yearEl.textContent = String(new Date().getFullYear());
   }
 
-  // Active-section indicator in the topnav.
-  // Watches each <section id="…"> referenced by a topnav link and
-  // toggles `.is-active` on the matching <a> when that section is the
-  // one currently dominating the viewport. Uses IntersectionObserver
-  // so it costs ~nothing on scroll. Only runs on pages that actually
-  // have same-page anchors in the nav (i.e. the home page).
+  // Mobile nav toggle
+  (function () {
+    var topnav = document.querySelector(".topnav");
+    var toggle = document.querySelector(".nav-toggle");
+    var panel = document.getElementById("primary-nav");
+    if (!topnav || !toggle || !panel) return;
+
+    function setOpen(open) {
+      topnav.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    }
+
+    toggle.addEventListener("click", function (e) {
+      e.preventDefault();
+      setOpen(!topnav.classList.contains("is-open"));
+    });
+
+    panel.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        setOpen(false);
+      });
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") setOpen(false);
+    });
+  })();
+
+  // Active-section indicator (home page hash nav only)
   (function () {
     if (!("IntersectionObserver" in window)) return;
     var navLinks = document.querySelectorAll('.topnav-nav a[href^="#"]');
@@ -37,8 +59,6 @@
       navLinks.forEach(function (l) { l.classList.remove("is-active"); });
     }
 
-    // Track ratios so the "most visible" section wins when several
-    // are intersecting at once (typical on tall viewports).
     var ratios = {};
     var observer = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -57,7 +77,6 @@
         linkBySection[bestId].classList.add("is-active");
       }
     }, {
-      // Account for the sticky 56px nav at the top.
       rootMargin: "-72px 0px -45% 0px",
       threshold: [0, 0.15, 0.35, 0.6, 0.85, 1]
     });
@@ -65,17 +84,223 @@
     sections.forEach(function (s) { observer.observe(s); });
   })();
 
-  // Signup form.
-  // For now this is a client-only handler that validates the email and
-  // falls back to a mailto: link so we don't need a backend on day one.
-  // When you're ready, point `endpoint` at a form service (Formspree,
-  // Netlify Forms, your own API, etc.).
-  var form = document.getElementById("signup");
+  // FAQ expand/collapse — animate open and close (native <details> alone snaps shut)
+  (function () {
+    var items = document.querySelectorAll(".faq-item");
+    if (!items.length) return;
+
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    items.forEach(function (item) {
+      var summary = item.querySelector("summary");
+      var body = item.querySelector(".faq-body");
+      if (!summary || !body) return;
+
+      if (item.open) item.classList.add("is-open");
+
+      summary.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        if (item.classList.contains("is-open")) {
+          item.classList.remove("is-open");
+          if (reduce) {
+            item.removeAttribute("open");
+            return;
+          }
+          var done = function (ev) {
+            if (ev.target !== body) return;
+            body.removeEventListener("transitionend", done);
+            item.removeAttribute("open");
+          };
+          body.addEventListener("transitionend", done);
+        } else {
+          item.setAttribute("open", "");
+          if (reduce) {
+            item.classList.add("is-open");
+            return;
+          }
+          // Force a frame so grid-template-rows can transition from 0fr → 1fr
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              item.classList.add("is-open");
+            });
+          });
+        }
+      });
+    });
+  })();
+
+  // Custom select — fully themeable (native <option> lists ignore CSS)
+  (function () {
+    var selects = document.querySelectorAll(".inquiry select");
+    if (!selects.length) return;
+
+    function closeAll(except) {
+      document.querySelectorAll(".select.is-open").forEach(function (wrap) {
+        if (wrap === except) return;
+        wrap.classList.remove("is-open");
+        var list = wrap.querySelector(".select-list");
+        var btn = wrap.querySelector(".select-trigger");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+        if (list) {
+          window.setTimeout(function () {
+            if (!wrap.classList.contains("is-open")) list.hidden = true;
+          }, 200);
+        }
+      });
+    }
+
+    selects.forEach(function (native, idx) {
+      if (native.dataset.enhanced === "1") return;
+      native.dataset.enhanced = "1";
+      native.classList.add("select-native");
+      native.tabIndex = -1;
+
+      var wrap = document.createElement("div");
+      wrap.className = "select";
+      wrap.dataset.select = "";
+
+      var listId = "select-list-" + (native.id || idx);
+      var trigger = document.createElement("button");
+      trigger.type = "button";
+      trigger.className = "select-trigger";
+      trigger.setAttribute("aria-haspopup", "listbox");
+      trigger.setAttribute("aria-expanded", "false");
+      trigger.setAttribute("aria-controls", listId);
+      if (native.id) {
+        trigger.id = native.id + "-trigger";
+        var label = document.querySelector('label[for="' + native.id + '"]');
+        if (label && !label.id) label.id = native.id + "-label";
+        if (label) trigger.setAttribute("aria-labelledby", label.id);
+      }
+
+      var labelEl = document.createElement("span");
+      labelEl.className = "select-trigger-label";
+      var chevron = document.createElement("span");
+      chevron.className = "select-chevron";
+      chevron.setAttribute("aria-hidden", "true");
+      trigger.appendChild(labelEl);
+      trigger.appendChild(chevron);
+
+      var list = document.createElement("ul");
+      list.className = "select-list";
+      list.id = listId;
+      list.setAttribute("role", "listbox");
+      list.hidden = true;
+
+      function syncLabel() {
+        var opt = native.options[native.selectedIndex];
+        var text = opt ? opt.textContent : "";
+        var empty = !native.value;
+        labelEl.textContent = empty ? (text || "Select…") : text;
+        labelEl.classList.toggle("is-placeholder", empty);
+      }
+
+      Array.prototype.forEach.call(native.options, function (opt, i) {
+        var li = document.createElement("li");
+        li.setAttribute("role", "presentation");
+        var btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "select-option";
+        btn.setAttribute("role", "option");
+        btn.dataset.value = opt.value;
+        btn.textContent = opt.textContent;
+        if (!opt.value) btn.classList.add("is-placeholder");
+        if (opt.selected) btn.classList.add("is-selected");
+        btn.setAttribute("aria-selected", opt.selected ? "true" : "false");
+        btn.addEventListener("click", function () {
+          native.selectedIndex = i;
+          native.dispatchEvent(new Event("change", { bubbles: true }));
+          list.querySelectorAll(".select-option").forEach(function (o) {
+            o.classList.remove("is-selected");
+            o.setAttribute("aria-selected", "false");
+          });
+          btn.classList.add("is-selected");
+          btn.setAttribute("aria-selected", "true");
+          syncLabel();
+          closeAll();
+          trigger.focus();
+        });
+        li.appendChild(btn);
+        list.appendChild(li);
+      });
+
+      syncLabel();
+
+      function setOpen(open) {
+        if (open) {
+          list.hidden = false;
+          trigger.setAttribute("aria-expanded", "true");
+          requestAnimationFrame(function () {
+            wrap.classList.add("is-open");
+          });
+          closeAll(wrap);
+          var selected = list.querySelector(".select-option.is-selected") ||
+            list.querySelector(".select-option");
+          if (selected) selected.focus();
+        } else {
+          wrap.classList.remove("is-open");
+          trigger.setAttribute("aria-expanded", "false");
+          window.setTimeout(function () {
+            if (!wrap.classList.contains("is-open")) list.hidden = true;
+          }, 200);
+        }
+      }
+
+      trigger.addEventListener("click", function () {
+        setOpen(!wrap.classList.contains("is-open"));
+      });
+
+      trigger.addEventListener("keydown", function (e) {
+        if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          setOpen(true);
+        }
+      });
+
+      list.addEventListener("keydown", function (e) {
+        var options = Array.prototype.slice.call(list.querySelectorAll(".select-option"));
+        var i = options.indexOf(document.activeElement);
+        if (e.key === "Escape") {
+          e.preventDefault();
+          setOpen(false);
+          trigger.focus();
+        } else if (e.key === "ArrowDown") {
+          e.preventDefault();
+          if (i < options.length - 1) options[i + 1].focus();
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          if (i > 0) options[i - 1].focus();
+          else trigger.focus();
+        } else if (e.key === "Home") {
+          e.preventDefault();
+          options[0].focus();
+        } else if (e.key === "End") {
+          e.preventDefault();
+          options[options.length - 1].focus();
+        }
+      });
+
+      native.parentNode.insertBefore(wrap, native);
+      wrap.appendChild(native);
+      wrap.appendChild(trigger);
+      wrap.appendChild(list);
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest(".select")) closeAll();
+    });
+
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") closeAll();
+    });
+  })();
+
+  // Inquiry form → mailto (structured body to info@dhiphos.com)
+  var form = document.getElementById("inquiry");
   if (!form) return;
 
-  var input  = form.querySelector('input[type="email"]');
-  var status = document.getElementById("signup-status");
-  var endpoint = ""; // e.g. "https://formspree.io/f/xxxxxx"
+  var status = document.getElementById("inquiry-status");
   var contactAddress = "info@dhiphos.com";
 
   function setStatus(message, kind) {
@@ -85,57 +310,72 @@
     if (kind) status.classList.add(kind);
   }
 
+  function val(name) {
+    var el = form.elements.namedItem(name);
+    return el && "value" in el ? String(el.value || "").trim() : "";
+  }
+
   function isValidEmail(value) {
-    // Pragmatic, not RFC-perfect.
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+  }
+
+  function focusField(name) {
+    var el = form.elements.namedItem(name);
+    if (!el) return;
+    var trigger = document.getElementById(el.id + "-trigger");
+    if (trigger) trigger.focus();
+    else el.focus();
   }
 
   form.addEventListener("submit", function (e) {
     e.preventDefault();
-    var value = (input && input.value || "").trim();
 
-    if (!isValidEmail(value)) {
-      setStatus("Please enter a valid email address.", "err");
-      if (input) input.focus();
+    var name = val("name");
+    var email = val("email");
+    var company = val("company");
+    var interest = val("interest");
+    var stack = val("stack");
+    var message = val("message");
+    var source = val("source") || "dhiphos.site";
+
+    if (!name) {
+      setStatus("Please enter your name.", "err");
+      focusField("name");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setStatus("Please enter a valid work email.", "err");
+      focusField("email");
+      return;
+    }
+    if (!company) {
+      setStatus("Please enter your company.", "err");
+      focusField("company");
+      return;
+    }
+    if (!interest) {
+      setStatus("Please select a primary interest.", "err");
+      focusField("interest");
       return;
     }
 
-    if (endpoint) {
-      setStatus("Sending…", "");
-      fetch(endpoint, {
-        method: "POST",
-        headers: { "Accept": "application/json", "Content-Type": "application/json" },
-        body: JSON.stringify({ email: value, source: "dhiphos.site" })
-      })
-        .then(function (r) {
-          if (!r.ok) throw new Error("network");
-          form.reset();
-          setStatus("Thanks. We'll be in touch.", "ok");
-        })
-        .catch(function () {
-          fallbackToMailto(value);
-        });
-    } else {
-      fallbackToMailto(value);
-    }
-  });
-
-  function fallbackToMailto(email) {
     var subject = encodeURIComponent(
-      "Inquiry: Dhiphos offerings & services"
+      "Dhiphos inquiry — " + interest + " — " + company
     );
     var body = encodeURIComponent(
       "Hello Dhiphos team,\n\n" +
-      "I'd like to learn more about your offerings and services.\n\n" +
-      "Area of interest: \n" +
-      "Brief context: \n\n" +
-      "Best regards,\n" +
-      "[Your name, Company]\n"
+      "Name: " + name + "\n" +
+      "Email: " + email + "\n" +
+      "Company: " + company + "\n" +
+      "Primary interest: " + interest + "\n" +
+      "Current stack: " + (stack || "(not provided)") + "\n" +
+      "Source page: " + source + "\n\n" +
+      "Message:\n" + (message || "(none)") + "\n\n" +
+      "Best regards,\n" + name + "\n"
     );
-    var href = "mailto:" + contactAddress +
-               "?subject=" + subject +
-               "&body=" + body;
+
     setStatus("Opening your email client…", "ok");
-    window.location.href = href;
-  }
+    window.location.href =
+      "mailto:" + contactAddress + "?subject=" + subject + "&body=" + body;
+  });
 })();

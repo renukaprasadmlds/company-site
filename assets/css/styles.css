@@ -43,15 +43,18 @@
 }
 
 :root {
-  --bg:        #ffffff;
-  --bg-elev:   #ffffffeb;          /* translucent surface for the top nav */
-  --fg:        #333333;
-  --muted:     #888888;
-  --accent:    #B45309;            /* amber-700 */
-  --accent-2:  #F59E0B;            /* amber-500 */
+  --bg:        #fafaf9;
+  --bg-elev:   #fafaf9f2;
+  --fg:        #2a2a2a;
+  --muted:     #6b6b6b;
+  --accent:    #B45309;
+  --accent-2:  #D97706;
   --on-accent: #ffffff;
-  --rule:      #88888833;
+  --rule:      #2a2a2a18;
   --selection: #B4530933;
+  --surface:   #ffffff;
+  --border:    #2a2a2a18;
+  --field-bg:  #ffffff;
 
   --font-display: "Geist", ui-sans-serif, system-ui, -apple-system,
                   BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
@@ -69,19 +72,23 @@
 
   --nav-h:    56px;
   --mark-size: 0.55em;
+  --radius: 4px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg:        #1a1a1a;
-    --bg-elev:   #1a1a1aeb;
-    --fg:        #ffffff;
-    --muted:     #888888;
+    --bg:        #141414;
+    --bg-elev:   #141414f2;
+    --fg:        #f2f2f2;
+    --muted:     #8a8a8a;
     --accent:    #F59E0B;
     --accent-2:  #FBBF24;
-    --on-accent: #1a1a1a;
-    --rule:      #ffffff1f;
+    --on-accent: #141414;
+    --rule:      #ffffff18;
     --selection: #F59E0B33;
+    --surface:   #1c1c1c;
+    --border:    #ffffff18;
+    --field-bg:  #1c1c1c;
   }
   html {
     -webkit-tap-highlight-color: rgba(245, 158, 11, 0.25);
@@ -102,6 +109,14 @@ html, body {
   padding: 0;
   background: var(--bg);
   color: var(--fg);
+}
+
+/* Quiet industrial atmosphere — soft vertical wash, not a flat white slab */
+body {
+  background-image:
+    radial-gradient(120% 80% at 50% -10%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 55%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg) 100%);
+  background-attachment: fixed;
 }
 
 /* Mobile tap highlight — replace the default system blue flash with a
@@ -266,14 +281,10 @@ a:hover {
 }
 
 .topnav-nav {
-  display: none;               /* hidden on small screens */
   gap: 1.5rem;
   align-items: center;
   font-family: var(--font-mono);
   font-size: 0.85rem;
-}
-@media (min-width: 640px) {
-  .topnav-nav { display: inline-flex; }
 }
 
 .topnav-nav a {
@@ -310,30 +321,28 @@ a:hover {
 
 .hero {
   margin: 0 0 clamp(2.5rem, 6vw, 4rem);
-  padding-top: clamp(1rem, 3vw, 2rem);   /* hero leads with H1 — minimal lead-in below the sticky nav */
+  padding-top: clamp(1.25rem, 3.5vw, 2.5rem);
   padding-bottom: clamp(2.25rem, 5vw, 3.25rem);
   border-bottom: 1px solid var(--rule);
 }
 
-/* Hero copy fills the full column on every viewport — same horizontal
-   footprint as the section headings, chip-rails, illustrations, and
-   entry border-rules used elsewhere on the page. No artificial inner
-   caps; readability is governed by the wrap's `--measure` token, which
-   itself widens responsively (64ch → 72ch → 78ch) on bigger screens. */
 .tagline {
   font-family: var(--font-display);
-  font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+  font-size: clamp(1.85rem, 3.8vw, 2.65rem);
   font-weight: 600;
-  line-height: 1.3;
-  letter-spacing: -0.01em;
+  line-height: 1.22;
+  letter-spacing: -0.02em;
   color: var(--fg);
-  margin: 0 0 1.25rem;
+  margin: 0 0 1.15rem;
+  max-width: 22em;
 }
 
 .lede {
   color: var(--muted);
-  margin: 0 0 1.5rem;
+  margin: 0 0 1.75rem;
   font-size: 1.05rem;
+  max-width: 42ch;
+  line-height: 1.6;
 }
 
 /* SAP product chip rail — small monospaced "tags" that signal native
@@ -359,6 +368,7 @@ a:hover {
   letter-spacing: 0.01em;
   color: var(--muted);
   margin: 0 0 0.55rem;
+  /* Sentence case — not forced lowercase */
 }
 
 .chip {
@@ -369,17 +379,14 @@ a:hover {
   font-weight: 500;
   letter-spacing: 0.01em;
   color: var(--fg);
-  background: transparent;
-  border: 1px solid var(--rule);
-  border-radius: 999px;
-  padding: 0.2rem 0.6rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.25rem 0.55rem;
   white-space: nowrap;
 }
-/* Strengthen the chip border in dark mode — the global `--rule` token
-   is intentionally faint (#ffffff1f) for hairline section dividers,
-   but at chip scale it almost disappears against #1a1a1a. */
 @media (prefers-color-scheme: dark) {
-  .chip { border-color: #ffffff33; }
+  .chip { border-color: var(--border); }
 }
 
 .hero-actions {
@@ -412,10 +419,10 @@ a:hover {
   font-weight: 500;
   background: transparent;
   color: var(--fg);
-  border: 1px solid var(--rule);
-  padding: 0.45rem 1rem;
+  border: 1px solid var(--border);
+  padding: 0.5rem 1.05rem;
   cursor: pointer;
-  border-radius: 4px;
+  border-radius: var(--radius);
   text-decoration: none;
   display: inline-flex;
   align-items: center;
@@ -474,13 +481,34 @@ a:hover {
 
 .block { margin: clamp(2rem, 5vw, 3rem) 0; }
 
-/* Section-to-section separator. Hairline rule + extra air so each
-   block reads as a discrete unit on the page. Entry-level rules
-   (top/bottom of the .entry stack) handle sub-section separation. */
+/* Section separators — more air + faded rule (no ornaments) */
 .block + .block {
-  border-top: 1px solid var(--rule);
-  padding-top: clamp(2.5rem, 6vw, 4rem);
-  margin-top: clamp(2.5rem, 6vw, 4rem);
+  border-top: 0;
+  margin-top: clamp(3.25rem, 9vw, 6rem);
+  padding-top: clamp(3.25rem, 9vw, 6rem);
+  position: relative;
+}
+
+.block + .block::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0,
+    var(--border) 8%,
+    var(--border) 92%,
+    transparent 100%
+  );
+}
+
+@supports not (background: linear-gradient(90deg, transparent, red)) {
+  .block + .block::before {
+    background: var(--rule);
+  }
 }
 
 .section {
@@ -499,6 +527,14 @@ a:hover {
   color: var(--muted);
   margin: 0 0 1.75rem;
   max-width: 60ch;
+}
+
+.block-lede-tight {
+  margin-bottom: 1rem;
+}
+
+.faq-list.is-spaced {
+  margin-top: 2rem;
 }
 
 .entry {
